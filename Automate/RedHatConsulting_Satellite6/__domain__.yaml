@@ -4,7 +4,7 @@ version: 1.0
 object:
   attributes:
     name: RedHatConsulting_Satellite6
-    description: Red Hat Satellite automate utilities developed by Red Hat Consulting.
+    description: ManageIQ Automate Domain for integrating with Red Hat Satellite 6 developed by Red Hat Consulting.
     display_name: 
     priority: 3
     enabled: true
