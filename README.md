@@ -1,10 +1,12 @@
 # miq-RedHat-Satellite6
-ManageIQ Automate Domain for integrating with Red Hat Satellite 6.
+ManageIQ Automate Domain for integrating with Red Hat Satellite 6 developed by Red Hat Consulting.
 
 # Table of Contents
 * [miq-RedHat-Satellite6](#miq-redhat-satellite6)
 * [Table of Contents](#table-of-contents)
 * [Features](#features)
+* [Dependencies](#dependencies)
+  * [Other Datastores](#other-datastores)
 * [Install](#install)
 * [Contributors](#contributors)
 
@@ -19,6 +21,14 @@ The high level features of this ManageIQ extension.
   * lifecycle environments
   * locations
   * organizaitons
+
+# Dependencies
+Dependencies of this ManageIQ extensions.
+
+## Other Datastores
+These ManageIQ atuomate domains must also be installed for this datastore to function.
+
+* [RedHatConsulting_Utilities](https://github.com/rhtconsulting/miq-Utilities)
 
 # Install
 0. Install dependencies
