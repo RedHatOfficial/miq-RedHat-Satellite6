@@ -1,0 +1,13 @@
+---
+object_type: domain
+version: 1.0
+object:
+  attributes:
+    name: RedHatConsulting_Satellite6
+    description: Red Hat Satellite automate utilities developed by Red Hat Consulting.
+    display_name: 
+    priority: 3
+    enabled: true
+    tenant_id: 10000000000001
+    source: user
+    top_level_namespace: 

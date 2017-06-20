@@ -1,0 +1,50 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: Satellite_CatalogItemInitialization
+    inherits: 
+    description: 
+  fields:
+  - sequencer:
+      value: "/Service/Provisioning/StateMachines/Methods/GroupSequenceCheck"
+      on_entry: update_serviceprovision_status(status => 'Processing Group Sequence
+        Check')
+      on_exit: update_serviceprovision_status(status => 'Processed Group Sequence
+        Check')
+      on_error: 'update_serviceprovision_status(status => ''Failed Group Sequence
+        Check: ${/#ae_reason}'')'
+  - pre1:
+      value: "/Service/Provisioning/StateMachines/Methods/DialogParser"
+      on_entry: update_serviceprovision_status(status => 'Processing Dialog')
+      on_exit: update_serviceprovision_status(status => 'Processed Dialog')
+      on_error: 'update_serviceprovision_status(status => ''Failed Processing Dialog:
+        ${/#ae_reason}'')'
+  - pre2:
+      value: "/Service/Provisioning/StateMachines/Methods/CatalogItemInitialization"
+      on_entry: update_serviceprovision_status(status => 'Processing Catalog Item
+        Initialization')
+      on_exit: update_serviceprovision_status(status => 'Processed Catalog Item Initialization')
+      on_error: 'update_serviceprovision_status(status => ''Failed Catalog Item Initialization:
+        ${/#ae_reason}'')'
+  - pre3:
+      value: "/Service/Provisioning/StateMachines/Methods/set_custom_provision_type"
+      on_entry: update_serviceprovision_status(status => 'Setting Custom Provision
+        Type')
+      on_exit: update_serviceprovision_status(status => 'Set Custom Provision Type')
+      on_error: 'update_serviceprovision_status(status => ''Failed Setting Custom
+        Provision Type: ${/#ae_reason}'')'
+  - pre4:
+      value: "/Service/Provisioning/StateMachines/Methods/set_satellite_options"
+      on_entry: update_serviceprovision_status(status => 'Setting Satellite Options')
+      on_exit: update_serviceprovision_status(status => 'Set Satellite Options')
+      on_error: 'update_serviceprovision_status(status => ''Failed Setting Satellite
+        Options: ${/#ae_reason}'')'
+  - pre5:
+      value: "/Service/Provisioning/StateMachines/Methods/set_vm_names"
+      on_entry: update_serviceprovision_status(status => 'Setting VM Names')
+      on_exit: update_serviceprovision_status(status => 'Set VM Names')
+      on_error: 'update_serviceprovision_status(status => ''Failed Setting VM Names:
+        ${/#ae_reason}'')'

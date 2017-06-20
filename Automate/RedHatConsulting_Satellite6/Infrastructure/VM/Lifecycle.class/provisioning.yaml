@@ -1,0 +1,17 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: Provisioning
+    inherits: 
+    description: 
+  fields:
+  - Method2:
+      value: get_provision_type
+      collect: "/provision_type = provision_type"
+  - Relationship5:
+      value: "/Infrastructure/VM/Provisioning/Profile/${/#user.normalized_ldap_group}#get_state_machine"
+  - Relationship6:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/${/#state_machine}/${#provision_type}"

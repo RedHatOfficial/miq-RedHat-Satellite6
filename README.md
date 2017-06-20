@@ -1,46 +1,30 @@
 # miq-RedHat-Satellite6
+ManageIQ Automate Domain for integrating with Red Hat Satellite 6.
 
-## General Information
+# Table of Contents
+* [miq-RedHat-Satellite6](#miq-redhat-satellite6)
+* [Table of Contents](#table-of-contents)
+* [Features](#features)
+* [Install](#install)
+* [Contributors](#contributors)
 
-| Name      | miq-RedHat-Satellite6 |
-| --- | --- | --- |
-| License   | GPL v2 (see LICENSE file) |
-| Version   | 1.0 |
+# Features
+The high level features of this ManageIQ extension.
 
-## Author
-| Name      | E-mail |
-| --- | --- |
-| Kevin Morey | kmorey@redhat.com |
-| Laurent Domb | ldomb@redhat.com |
+* Satellite 6 PXE & Kickstart based provisioning Service and VM state machines
+* Register VM to Satellite 6
+* VM retirment including unregister VM from Satellite 6
+* Satellite 6 dynamic dialogs
+  * hostgroups
+  * lifecycle environments
+  * locations
+  * organizaitons
 
-## Packager
-| Name              | E-mail |
-| --- | --- |
-| Jose Simonelli    | jose@redhat.com |
-
-
-## Install
-1) Download import/export rake scripts
-```
-cd /tmp
-
-if [ -d cfme-rhconsulting-scripts-master ] ; then
-    rm -fR /tmp/cfme-rhconsulting-scripts-master
-fi
-
-wget -O cfme-rhconsulting-scripts.zip https://github.com/rhtconsulting/cfme-rhconsulting-scripts/archive/master.zip
-unzip cfme-rhconsulting-scripts.zip
-cd cfme-rhconsulting-scripts-master
-make install
-```
-
-2) Install {project-name} on appliance
-```
-PROJECT_NAME="miq-RedHat-Satellite6"
-PROJECT_ZIP="https://github.com/rhtconsulting/miq-RedHat-Satellite6/archive/master.zip"
-cd /tmp
-wget -O ${PROJECT_NAME}.zip ${PROJECT_ZIP}
-unzip ${PROJECT_NAME}.zip
-cd ${PROJECT_NAME}-master
-sh install.sh
-```
+# Install
+0. Install dependencies
+1. Automate -> Import/Export
+2. Import Datastore via git
+3. Git URL: `https://github.com/rhtconsulting/miq-RedHat-Satellite6.git`
+4. Submit
+5. Select Branc/Tag to syncronize with
+6. Submit

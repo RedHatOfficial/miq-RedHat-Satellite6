@@ -1,0 +1,12 @@
+---
+object_type: method
+version: 1.0
+object:
+  attributes:
+    name: register_satellite
+    display_name: RegisterSatellite
+    description: 
+    scope: instance
+    language: ruby
+    location: inline
+  inputs: []

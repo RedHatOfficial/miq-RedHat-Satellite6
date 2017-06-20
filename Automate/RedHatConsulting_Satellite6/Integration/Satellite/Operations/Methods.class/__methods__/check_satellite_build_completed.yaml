@@ -1,0 +1,12 @@
+---
+object_type: method
+version: 1.0
+object:
+  attributes:
+    name: check_satellite_build_completed
+    display_name: CheckSatelliteBuildCompleted
+    description: 
+    scope: instance
+    language: ruby
+    location: inline
+  inputs: []

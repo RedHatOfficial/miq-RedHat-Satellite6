@@ -1,0 +1,18 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: 
+    name: default
+    inherits: 
+    description: 
+  fields:
+  - redhat:
+      value: redhat_best_fit_cluster
+  - vmware:
+      value: vmware_drs_cluster_best_fit_with_scope
+  - microsoft:
+      value: microsoft_best_fit_least_utilized
+  - vmware_customize:
+      value: vmware_customize
