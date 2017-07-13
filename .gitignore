@@ -21,6 +21,7 @@ test/version_tmp
 tmp
 asciidoc/images/icons/*
 log/*
+.manifest.yaml
 
 # YARD artifacts
 .yardoc
