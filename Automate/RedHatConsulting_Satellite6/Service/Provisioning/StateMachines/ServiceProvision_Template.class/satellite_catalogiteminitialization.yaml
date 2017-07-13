@@ -43,7 +43,7 @@ object:
       on_error: 'update_serviceprovision_status(status => ''Failed Setting Satellite
         Options: ${/#ae_reason}'')'
   - pre5:
-      value: "/Service/Provisioning/StateMachines/Methods/set_vm_names"
+      value: "/Service/Provisioning/Naming/set_vm_names"
       on_entry: update_serviceprovision_status(status => 'Setting VM Names')
       on_exit: update_serviceprovision_status(status => 'Set VM Names')
       on_error: 'update_serviceprovision_status(status => ''Failed Setting VM Names:
