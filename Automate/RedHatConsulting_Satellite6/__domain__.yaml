@@ -4,10 +4,9 @@ version: 1.0
 object:
   attributes:
     name: RedHatConsulting_Satellite6
-    description: ManageIQ Automate Domain for integrating with Red Hat Satellite 6 developed by Red Hat Consulting
-    display_name: 
-    priority: 8
+    description: ManageIQ Automate Domain for integrating with Red Hat Satellite 6
+      developed by Red Hat Consulting
+    display_name: Red Hat Satellite 6
     enabled: true
-    tenant_id: 10000000000001
     source: user
     top_level_namespace: 
