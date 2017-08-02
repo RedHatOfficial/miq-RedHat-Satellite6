@@ -1,6 +1,5 @@
 # Populates a dynamic drop down with the Lifecycle Enviornments from a Satellite Organization.
 #
-# TODO: DOC ME
 @DEBUG = false
 
 require 'apipie-bindings'

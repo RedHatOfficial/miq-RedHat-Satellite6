@@ -1,6 +1,6 @@
 # Populates a dynamic drop down with the Locations from Satellite.
 #
-@DEBUG = true
+@DEBUG = false
 
 require 'apipie-bindings'
 
