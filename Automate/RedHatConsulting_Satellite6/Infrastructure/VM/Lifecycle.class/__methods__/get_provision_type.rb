@@ -49,7 +49,7 @@ begin
   error("$evm.root['miq_provision'] not found") if prov.nil?
   
   # find custom provision type in the provision options if it is there
-  custom_provision_type = prov.get_option(:custom_provision_type)
+  custom_provision_type = prov.get_option(:custom_provision_type) || prov.get_option(:ws_values)[:custom_provision_type]
   $evm.log(:info, "custom_provision_type => '#{custom_provision_type}'") if @DEBUG
 
   # if a custom provision type is set use that as the provsion type

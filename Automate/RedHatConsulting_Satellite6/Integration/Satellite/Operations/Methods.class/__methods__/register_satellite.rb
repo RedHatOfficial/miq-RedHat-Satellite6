@@ -69,10 +69,10 @@ begin
   name                      = vm.name
   mac                       = vm.mac_addresses[0]
   ip                        = nil # TODO: eventully this should come from someplace like Infoblox, for now Satellite assigns it from its DB
-  satellite_organization_id = prov.get_option(:satellite_organization_id)
-  satellite_location_id     = prov.get_option(:satellite_location_id)
-  satellite_hostgroup_id    = prov.get_option(:satellite_hostgroup_id)
-  satellite_domain_id       = prov.get_option(:satellite_domain_id)
+  satellite_organization_id = prov.get_option(:satellite_organization_id) || prov.get_option(:ws_values)[:satellite_organization_id]
+  satellite_location_id     = prov.get_option(:satellite_location_id)     || prov.get_option(:ws_values)[:satellite_location_id]
+  satellite_hostgroup_id    = prov.get_option(:satellite_hostgroup_id)    || prov.get_option(:ws_values)[:satellite_hostgroup_id]
+  satellite_domain_id       = prov.get_option(:satellite_domain_id)       || prov.get_option(:ws_values)[:satellite_domain_id]
   
   error("Required miq_provision option <satellite_organization_id> not found") if satellite_organization_id.nil?
   error("Required miq_provision option <satellite_location_id> not found")     if satellite_location_id.nil?

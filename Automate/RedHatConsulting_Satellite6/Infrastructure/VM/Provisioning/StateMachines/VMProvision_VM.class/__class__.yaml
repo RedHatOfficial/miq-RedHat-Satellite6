@@ -134,7 +134,7 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: RegisterCMDB
+      name: AddToService
       display_name: 
       datatype: string
       priority: 7
@@ -154,10 +154,30 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: RegisterSatellite
+      name: RegisterCMDB
       display_name: 
       datatype: string
       priority: 8
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: state
+      name: RegisterSatellite
+      display_name: 
+      datatype: string
+      priority: 9
       owner: 
       default_value: 
       substitute: true
@@ -178,7 +198,7 @@ object:
       name: StartVM
       display_name: 
       datatype: string
-      priority: 9
+      priority: 10
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/StartVM"
       substitute: true
@@ -198,7 +218,7 @@ object:
       name: CheckSatelliteBuildCompleted
       display_name: 
       datatype: string
-      priority: 10
+      priority: 11
       owner: 
       default_value: 
       substitute: true
@@ -218,7 +238,7 @@ object:
       name: CheckFirstPuppetRunComplete
       display_name: 
       datatype: string
-      priority: 11
+      priority: 12
       owner: 
       default_value: 
       substitute: true
@@ -238,7 +258,7 @@ object:
       name: PostProvision
       display_name: 
       datatype: string
-      priority: 12
+      priority: 13
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/PostProvision#${/#miq_provision.source.vendor}"
       substitute: true
@@ -259,7 +279,7 @@ object:
       name: EmailOwner
       display_name: 
       datatype: string
-      priority: 13
+      priority: 14
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/Email/MiqProvision_Complete?event=vm_provisioned"
       substitute: true
@@ -279,7 +299,7 @@ object:
       name: Finished
       display_name: 
       datatype: string
-      priority: 14
+      priority: 15
       owner: 
       default_value: "/System/CommonMethods/StateMachineMethods/vm_provision_finished"
       substitute: true
