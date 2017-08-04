@@ -44,10 +44,11 @@ begin
   hostgroups_index = satellite_api.resource(:hostgroups).call(:index)
   $evm.log(:info, "hostgroups_index = #{hostgroups_index}") if @DEBUG
   
+  
   dialog_field               = $evm.object
   dialog_field["sort_by"]    = "value"
   dialog_field["sort_order"] = "ascending"
   dialog_field["data_type"]  = "integer"
   dialog_field["required"]   = true
-  dialog_field["values"]     = Hash[ *hostgroups_index['results'].collect { |item| [item['id'], item['name']] }.flatten ]
+  dialog_field["values"]     = Hash[ *hostgroups_index['results'].collect { |item| [item['id'], item['title']] }.flatten ]
 end
