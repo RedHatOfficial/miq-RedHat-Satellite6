@@ -58,7 +58,7 @@ begin
   
   # determine :satellite_domain_id
   domain_name = task.get_option(:dialog)['dialog_domain_name']
-  error("Current ServiceTemplateProvisionTask does not have required :domain_name option set") if domain_name.nil?
+  error("Required :domain_name option is not set on current ServiceTemplateProvisionTask") if domain_name.nil?
   $evm.log(:info, "domain_name => '#{domain_name}'") if @DEBUG
   satellite_domains = satellite_api.resource(:domains).call(:index)['results']
   satellite_domain  = satellite_domains.find { |satellite_domain| satellite_domain['name'] == domain_name }
