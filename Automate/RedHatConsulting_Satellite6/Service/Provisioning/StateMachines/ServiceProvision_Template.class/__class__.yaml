@@ -133,7 +133,7 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: configurechilddialog
+      name: pre6
       display_name: 
       datatype: string
       priority: 7
@@ -153,10 +153,50 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: provision
+      name: pre7
       display_name: 
       datatype: string
       priority: 8
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: state
+      name: configurechilddialog
+      display_name: 
+      datatype: string
+      priority: 9
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: state
+      name: provision
+      display_name: 
+      datatype: string
+      priority: 10
       owner: 
       default_value: "/Service/Provisioning/StateMachines/Methods/Provision"
       substitute: true
@@ -176,7 +216,7 @@ object:
       name: checkprovisioned
       display_name: 
       datatype: string
-      priority: 9
+      priority: 11
       owner: 
       default_value: "/Service/Provisioning/StateMachines/Methods/CheckProvisioned"
       substitute: true
@@ -196,7 +236,7 @@ object:
       name: post1
       display_name: 
       datatype: string
-      priority: 10
+      priority: 12
       owner: 
       default_value: 
       substitute: true
@@ -216,7 +256,7 @@ object:
       name: post2
       display_name: 
       datatype: string
-      priority: 11
+      priority: 13
       owner: 
       default_value: 
       substitute: true
@@ -236,7 +276,7 @@ object:
       name: post3
       display_name: 
       datatype: string
-      priority: 12
+      priority: 14
       owner: 
       default_value: 
       substitute: true
@@ -256,7 +296,7 @@ object:
       name: post4
       display_name: 
       datatype: string
-      priority: 13
+      priority: 15
       owner: 
       default_value: 
       substitute: true
@@ -276,7 +316,7 @@ object:
       name: post5
       display_name: 
       datatype: string
-      priority: 14
+      priority: 16
       owner: 
       default_value: 
       substitute: true
@@ -296,7 +336,7 @@ object:
       name: EmailOwner
       display_name: 
       datatype: string
-      priority: 15
+      priority: 17
       owner: 
       default_value: "/Service/Provisioning/Email/ServiceProvision_complete?event=service_provisioned"
       substitute: true
@@ -316,7 +356,7 @@ object:
       name: Finished
       display_name: 
       datatype: string
-      priority: 16
+      priority: 18
       owner: 
       default_value: "/System/CommonMethods/StateMachineMethods/service_provision_finished"
       substitute: true
