@@ -39,11 +39,13 @@ def get_satellite_api()
 end
 
 begin
+  # If there isn't a vmdb_object_type yet just exit. The method will be recalled with an vmdb_object_type
+  exit MIQ_OK unless $evm.root['vmdb_object_type']
+  
   satellite_api = get_satellite_api()
   
   hostgroups_index = satellite_api.resource(:hostgroups).call(:index)
   $evm.log(:info, "hostgroups_index = #{hostgroups_index}") if @DEBUG
-  
   
   dialog_field               = $evm.object
   dialog_field["sort_by"]    = "value"

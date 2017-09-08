@@ -39,6 +39,9 @@ def get_satellite_api()
 end
 
 begin
+  # If there isn't a vmdb_object_type yet just exit. The method will be recalled with an vmdb_object_type
+  exit MIQ_OK unless $evm.root['vmdb_object_type']
+  
   satellite_api = get_satellite_api()
   
   organization_index = satellite_api.resource(:organizations).call(:index)
