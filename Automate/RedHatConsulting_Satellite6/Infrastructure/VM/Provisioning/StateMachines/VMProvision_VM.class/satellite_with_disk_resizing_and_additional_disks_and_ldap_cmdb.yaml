@@ -3,20 +3,28 @@ object_type: instance
 version: 1.0
 object:
   attributes:
-    display_name: Provision VM using Satellite
-    name: satellite
+    display_name: Provision VM using Satellite with disk resizing, additional disks,
+      and LDAP CMDB
+    name: satellite_with_disk_resizing_and_additional_disks_and_ldap_cmdb
     inherits: 
-    description: 
+    description: Provisions a new VM using Satellite PXE with the ability to resize
+      the primary disk, add additional disks, and register to an LDAP CMDB
   fields:
   - Provision:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/Provision"
   - CheckProvisioned:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/CheckProvisioned"
+  - ResizePrimaryDisk:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/ResizeDisk"
   - AddToService:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddVMToService"
+  - RegisterCMDB:
+      value: "/Integration/LDAP/StateMachines/UpdateLDAPEntryAttributes/Default"
   - RegisterSatellite:
       value: "/Integration/Satellite/Operations/Methods/RegisterSatellite"
   - StartVM:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/StartVM"
   - CheckSatelliteBuildCompleted:
       value: "/Integration/Satellite/Operations/Methods/CheckSatelliteBuildCompleted"
+  - AddAdditionalDisksToVM:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddDisksToVM"

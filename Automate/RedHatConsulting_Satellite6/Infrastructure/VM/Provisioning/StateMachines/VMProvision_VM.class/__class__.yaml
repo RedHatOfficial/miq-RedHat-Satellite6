@@ -109,7 +109,7 @@ object:
       condition: 
       on_entry: update_provision_status(status => 'Creating VM')
       on_exit: update_provision_status(status => 'Creating VM')
-      on_error: 'update_provision_status(status => ''Error Creating VM: ${/#ae_reason}'')'
+      on_error: 'update_provision_status(status => ''Error creating VM: ${/#ae_reason}'')'
       max_retries: '100'
       max_time: 
   - field:
@@ -134,7 +134,7 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: AddToService
+      name: ResizePrimaryDisk
       display_name: 
       datatype: string
       priority: 7
@@ -147,14 +147,15 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
-      max_retries: 
+      on_entry: update_provision_status(status => 'Resize primary disk')
+      on_exit: update_provision_status(status => 'Resized primary disk')
+      on_error: 'update_provision_status(status => ''Error resizing primary disk:
+        ${/#ae_reason}'')'
+      max_retries: '5'
       max_time: 
   - field:
       aetype: state
-      name: RegisterCMDB
+      name: AddToService
       display_name: 
       datatype: string
       priority: 8
@@ -167,14 +168,14 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
+      on_entry: update_provision_status(status => 'Add to service')
+      on_exit: update_provision_status(status => 'Added to service')
+      on_error: 'update_provision_status(status => ''Error adding to service: ${/#ae_reason}'')'
       max_retries: 
       max_time: 
   - field:
       aetype: state
-      name: RegisterSatellite
+      name: RegisterCMDB
       display_name: 
       datatype: string
       priority: 9
@@ -187,9 +188,29 @@ object:
       scope: 
       description: 
       condition: 
+      on_entry: update_provision_status(status => 'Register to CMDB')
+      on_exit: update_provision_status(status => 'Registered to CMDB')
+      on_error: 'update_provision_status(status => ''Error registering to CMDB: ${/#ae_reason}'')'
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: state
+      name: RegisterSatellite
+      display_name: 
+      datatype: string
+      priority: 10
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
       on_entry: update_provision_status(status => 'Creating Satellite Host Entry')
       on_exit: update_provision_status(status => 'Created Satellite Host Entry')
-      on_error: 'update_provision_status(status => ''Error Creating Satellite Host
+      on_error: 'update_provision_status(status => ''Error creating Satellite Host
         Entry: ${/#ae_reason}'')'
       max_retries: 
       max_time: 
@@ -198,7 +219,7 @@ object:
       name: StartVM
       display_name: 
       datatype: string
-      priority: 10
+      priority: 11
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/StartVM"
       substitute: true
@@ -210,7 +231,7 @@ object:
       condition: 
       on_entry: update_provision_status(status => 'Starting VM')
       on_exit: update_provision_status(status => 'Started VM')
-      on_error: 'update_provision_status(status => ''Failed Starting VM: ${/#ae_reason}'')'
+      on_error: 'update_provision_status(status => ''Error starting VM: ${/#ae_reason}'')'
       max_retries: 
       max_time: 
   - field:
@@ -218,7 +239,29 @@ object:
       name: CheckSatelliteBuildCompleted
       display_name: 
       datatype: string
-      priority: 11
+      priority: 12
+      owner: 
+      default_value: "/Integration/Satellite/Operations/Methods/CheckSatelliteBuildCompleted"
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: update_provision_status(status => 'Waiting for VM Satellite (PXE)
+        Build to Complete')
+      on_exit: update_provision_status(status => 'VM Satellite (PXE) Build Completed')
+      on_error: 'update_provision_status(status => ''Error waiting for VM Satellite
+        (PXE) Build to Complete: ${/#ae_reason}'')'
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: state
+      name: AddAdditionalDisksToVM
+      display_name: 
+      datatype: string
+      priority: 13
       owner: 
       default_value: 
       substitute: true
@@ -228,17 +271,18 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
-      max_retries: 
+      on_entry: update_provision_status(status => 'Add additional disks')
+      on_exit: update_provision_status(status => 'Added additional disks')
+      on_error: 'update_provision_status(status => ''Error adding additional disks:
+        ${/#ae_reason}'')'
+      max_retries: '5'
       max_time: 
   - field:
       aetype: state
       name: CheckFirstPuppetRunComplete
       display_name: 
       datatype: string
-      priority: 12
+      priority: 14
       owner: 
       default_value: 
       substitute: true
@@ -248,9 +292,11 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
+      on_entry: update_provision_status(status => 'Waiting for first Puppet run to
+        complete')
+      on_exit: update_provision_status(status => 'First Puppet run completed')
+      on_error: 'update_provision_status(status => ''Error waiting for first Puppet
+        run: ${/#ae_reason}'')'
       max_retries: 
       max_time: 
   - field:
@@ -258,7 +304,7 @@ object:
       name: PostProvision
       display_name: 
       datatype: string
-      priority: 13
+      priority: 15
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/PostProvision#${/#miq_provision.source.vendor}"
       substitute: true
@@ -279,7 +325,7 @@ object:
       name: EmailOwner
       display_name: 
       datatype: string
-      priority: 14
+      priority: 16
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/Email/MiqProvision_Complete?event=vm_provisioned"
       substitute: true
@@ -299,7 +345,7 @@ object:
       name: Finished
       display_name: 
       datatype: string
-      priority: 15
+      priority: 17
       owner: 
       default_value: "/System/CommonMethods/StateMachineMethods/vm_provision_finished"
       substitute: true
