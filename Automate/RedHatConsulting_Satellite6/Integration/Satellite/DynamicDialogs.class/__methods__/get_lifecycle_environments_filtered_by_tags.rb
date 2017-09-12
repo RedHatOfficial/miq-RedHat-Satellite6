@@ -1,7 +1,7 @@
 # Populates a dynamic drop down with the Lifecycle Enviornments from a Satellite Organization
 # filtered by tags on the providers available.
 #
-@DEBUG = true
+@DEBUG = false
 
 require 'apipie-bindings'
 
