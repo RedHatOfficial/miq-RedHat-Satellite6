@@ -14,17 +14,34 @@ object:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/Provision"
   - CheckProvisioned:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/CheckProvisioned"
-  - ResizePrimaryDisk:
-      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/ResizeDisk"
   - AddToService:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddVMToService"
-  - RegisterCMDB:
-      value: "/Integration/LDAP/StateMachines/UpdateLDAPEntryAttributes/Default"
   - RegisterSatellite:
       value: "/Integration/Satellite/Operations/Methods/RegisterSatellite"
+  - PostVMClone_1:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/ResizeDisk"
+      on_entry: update_provision_status(status => 'Resize primary disk')
+      on_exit: update_provision_status(status => 'Resized primary disk')
+      on_error: 'update_provision_status(status => ''Error resizing primary disk:
+        ${/#ae_reason}'')'
   - StartVM:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/StartVM"
   - CheckSatelliteBuildCompleted:
       value: "/Integration/Satellite/Operations/Methods/CheckSatelliteBuildCompleted"
-  - AddAdditionalDisksToVM:
+  - PostSatelliteBuildCompleted_1:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/WaitForVMIPAddresses"
+      on_entry: update_provision_status(status => 'Wait for VM IP Addresses')
+      on_exit: update_provision_status(status => 'Wait for VM IP Addresses')
+      on_error: 'update_provision_status(status => ''Error waiting for VM IP Addresses:
+        ${/#ae_reason}'')'
+  - PostSatelliteBuildCompleted_2:
+      value: "/Integration/LDAP/StateMachines/UpdateLDAPEntryAttributes/Default"
+      on_entry: update_provision_status(status => 'Register to LDAP')
+      on_exit: update_provision_status(status => 'Registered to LDAP')
+      on_error: 'update_provision_status(status => ''Error registering to LDAP: ${/#ae_reason}'')'
+  - PostSatelliteBuildCompleted_3:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddDisksToVM"
+      on_entry: update_provision_status(status => 'Add additional disks')
+      on_exit: update_provision_status(status => 'Added additional disks')
+      on_error: 'update_provision_status(status => ''Error adding additional disks:
+        ${/#ae_reason}'')'

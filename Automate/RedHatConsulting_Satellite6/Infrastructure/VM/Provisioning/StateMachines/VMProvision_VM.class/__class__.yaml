@@ -134,31 +134,10 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: ResizePrimaryDisk
-      display_name: 
-      datatype: string
-      priority: 7
-      owner: 
-      default_value: 
-      substitute: true
-      message: create
-      visibility: 
-      collect: 
-      scope: 
-      description: 
-      condition: 
-      on_entry: update_provision_status(status => 'Resize primary disk')
-      on_exit: update_provision_status(status => 'Resized primary disk')
-      on_error: 'update_provision_status(status => ''Error resizing primary disk:
-        ${/#ae_reason}'')'
-      max_retries: '5'
-      max_time: 
-  - field:
-      aetype: state
       name: AddToService
       display_name: 
       datatype: string
-      priority: 8
+      priority: 7
       owner: 
       default_value: 
       substitute: true
@@ -175,30 +154,10 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: RegisterCMDB
-      display_name: 
-      datatype: string
-      priority: 9
-      owner: 
-      default_value: 
-      substitute: true
-      message: create
-      visibility: 
-      collect: 
-      scope: 
-      description: 
-      condition: 
-      on_entry: update_provision_status(status => 'Register to CMDB')
-      on_exit: update_provision_status(status => 'Registered to CMDB')
-      on_error: 'update_provision_status(status => ''Error registering to CMDB: ${/#ae_reason}'')'
-      max_retries: 
-      max_time: 
-  - field:
-      aetype: state
       name: RegisterSatellite
       display_name: 
       datatype: string
-      priority: 10
+      priority: 8
       owner: 
       default_value: 
       substitute: true
@@ -216,10 +175,110 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: StartVM
+      name: PostVMClone_1
+      display_name: 
+      datatype: string
+      priority: 9
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: 
+  - field:
+      aetype: state
+      name: PostVMClone_2
+      display_name: 
+      datatype: string
+      priority: 10
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: 
+  - field:
+      aetype: state
+      name: PostVMClone_3
       display_name: 
       datatype: string
       priority: 11
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: 
+  - field:
+      aetype: state
+      name: PostVMClone_4
+      display_name: 
+      datatype: string
+      priority: 12
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: 
+  - field:
+      aetype: state
+      name: PostVMClone_5
+      display_name: 
+      datatype: string
+      priority: 13
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: 
+  - field:
+      aetype: state
+      name: StartVM
+      display_name: 
+      datatype: string
+      priority: 14
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/StartVM"
       substitute: true
@@ -239,7 +298,7 @@ object:
       name: CheckSatelliteBuildCompleted
       display_name: 
       datatype: string
-      priority: 12
+      priority: 15
       owner: 
       default_value: "/Integration/Satellite/Operations/Methods/CheckSatelliteBuildCompleted"
       substitute: true
@@ -251,17 +310,18 @@ object:
       condition: 
       on_entry: update_provision_status(status => 'Waiting for VM Satellite (PXE)
         Build to Complete')
-      on_exit: update_provision_status(status => 'VM Satellite (PXE) Build Completed')
+      on_exit: update_provision_status(status => 'Waiting for VM Satellite (PXE) Build
+        to Complete')
       on_error: 'update_provision_status(status => ''Error waiting for VM Satellite
         (PXE) Build to Complete: ${/#ae_reason}'')'
       max_retries: 
       max_time: 
   - field:
       aetype: state
-      name: AddAdditionalDisksToVM
+      name: PostSatelliteBuildCompleted_1
       display_name: 
       datatype: string
-      priority: 13
+      priority: 16
       owner: 
       default_value: 
       substitute: true
@@ -271,18 +331,97 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: update_provision_status(status => 'Add additional disks')
-      on_exit: update_provision_status(status => 'Added additional disks')
-      on_error: 'update_provision_status(status => ''Error adding additional disks:
-        ${/#ae_reason}'')'
-      max_retries: '5'
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: 
+  - field:
+      aetype: state
+      name: PostSatelliteBuildCompleted_2
+      display_name: 
+      datatype: string
+      priority: 17
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: 
+  - field:
+      aetype: state
+      name: PostSatelliteBuildCompleted_3
+      display_name: 
+      datatype: string
+      priority: 18
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: 
+  - field:
+      aetype: state
+      name: PostSatelliteBuildCompleted_4
+      display_name: 
+      datatype: string
+      priority: 19
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: 
+  - field:
+      aetype: state
+      name: PostSatelliteBuildCompleted_5
+      display_name: 
+      datatype: string
+      priority: 20
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
       max_time: 
   - field:
       aetype: state
       name: CheckFirstPuppetRunComplete
       display_name: 
       datatype: string
-      priority: 14
+      priority: 21
       owner: 
       default_value: 
       substitute: true
@@ -304,7 +443,7 @@ object:
       name: PostProvision
       display_name: 
       datatype: string
-      priority: 15
+      priority: 22
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/PostProvision#${/#miq_provision.source.vendor}"
       substitute: true
@@ -325,7 +464,7 @@ object:
       name: EmailOwner
       display_name: 
       datatype: string
-      priority: 16
+      priority: 23
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/Email/MiqProvision_Complete?event=vm_provisioned"
       substitute: true
@@ -345,7 +484,7 @@ object:
       name: Finished
       display_name: 
       datatype: string
-      priority: 17
+      priority: 24
       owner: 
       default_value: "/System/CommonMethods/StateMachineMethods/vm_provision_finished"
       substitute: true
