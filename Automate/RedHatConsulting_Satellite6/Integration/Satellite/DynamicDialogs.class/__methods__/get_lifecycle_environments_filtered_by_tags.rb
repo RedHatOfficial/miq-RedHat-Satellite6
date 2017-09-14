@@ -38,13 +38,39 @@ end
 #
 # @param category Tag Category to create the Tag in
 # @param tag      Tag to create in the given Tag Category
+#
+# @source https://pemcg.gitbooks.io/mastering-automation-in-cloudforms-4-2-and-manage/content/using_tags_from_automate/chapter.html
 def create_tag(category, tag)
+  create_tag_category(category)
   tag_name = to_tag_name(tag)
   unless $evm.execute('tag_exists?', category, tag_name)
     $evm.execute('tag_create',
                  category,
                  :name => tag_name,
                  :description => tag)
+  end
+end
+
+# Create a Tag  Category if it does not already exist
+#
+# @param category     Tag Category to create
+# @param description  Tag Category description.
+#                     Optional
+#                     Defaults to the `category`
+# @param single_value True if a resource can only have one tag from this category,
+#                     False if a resource can have multiple tags from this category.
+#                     Optional.
+#                     Defaults to `false`
+#
+# @source https://pemcg.gitbooks.io/mastering-automation-in-cloudforms-4-2-and-manage/content/using_tags_from_automate/chapter.html
+def create_tag_category(category, description = nil, single_value = false)
+  category_name = to_tag_name(category)
+  unless $evm.execute('category_exists?', category_name)
+    $evm.execute('category_create',
+                 :name => category_name,
+                 :single_value => single_value,
+                 :perf_by_tag => false,
+                 :description => description || category)
   end
 end
 
