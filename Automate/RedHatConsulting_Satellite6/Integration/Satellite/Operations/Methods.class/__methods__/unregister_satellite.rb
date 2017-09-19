@@ -18,6 +18,14 @@ def error(msg)
   exit MIQ_STOP
 end
 
+# Notify and log a warning message.
+#
+# @param msg Message to warn with
+def warn(msg)
+  $evm.create_notification(:level => 'warning', :message => msg)
+  $evm.log(:warn, msg)
+end
+
 # Gets an ApiPie binding to the Satellite API.
 #
 # @return ApipieBindings to the Satellite API
@@ -55,9 +63,15 @@ begin
   if !satellite_host_id.nil?
     satellite_api = get_satellite_api()
     
-    $evm.log(:info, "Unregister Satellite Host: { :id => '#{satellite_host_id}' }")
-    result = satellite_api.resource(:hosts).call(:destroy, { :id => satellite_host_id})
-    $evm.log(:info, "Unregistered Satellite Host: { :id => '#{satellite_host_id}', result => #{result} }")
+    begin
+      $evm.log(:info, "Unregister Satellite Host: { :id => '#{satellite_host_id}' }")
+      result = satellite_api.resource(:hosts).call(:destroy, { :id => satellite_host_id})
+      $evm.log(:info, "Unregistered Satellite Host: { :id => '#{satellite_host_id}', result => #{result} }")
+    rescue RestClient::NotFound
+      warn("No Satellite host [#{satellite_host_id}] to unregister for VM [#{$evm.root['vm'].name}]")
+    rescue => e
+      warn("Unexpected error when unregistering Satellite host [#{satellite_host_id}] for VM [#{$evm.root['vm'].name}]: #{e.message}")
+    end
   else
     $evm.log(:info, "VM '#{vm.name}' does not have 'satellite_host_id' custom attribute set, therefor not unregistering from Satellite.")
   end
