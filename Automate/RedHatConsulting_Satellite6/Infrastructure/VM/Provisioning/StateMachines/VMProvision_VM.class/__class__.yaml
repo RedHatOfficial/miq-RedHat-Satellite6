@@ -213,7 +213,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: 
+      max_time: '600'
   - field:
       aetype: state
       name: PostVMClone_2
@@ -233,7 +233,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: 
+      max_time: '600'
   - field:
       aetype: state
       name: PostVMClone_3
@@ -253,7 +253,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: 
+      max_time: '600'
   - field:
       aetype: state
       name: PostVMClone_4
@@ -273,7 +273,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: 
+      max_time: '600'
   - field:
       aetype: state
       name: PostVMClone_5
@@ -293,7 +293,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: 
+      max_time: '600'
   - field:
       aetype: state
       name: StartVM
@@ -336,7 +336,7 @@ object:
       on_error: 'update_provision_status(status => ''Error waiting for VM Satellite
         (PXE) Build to Complete: ${/#ae_reason}'')'
       max_retries: 
-      max_time: 
+      max_time: '3600'
   - field:
       aetype: state
       name: PostSatelliteBuildCompleted_1
@@ -356,7 +356,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: 
+      max_time: '600'
   - field:
       aetype: state
       name: PostSatelliteBuildCompleted_2
@@ -376,7 +376,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: 
+      max_time: '600'
   - field:
       aetype: state
       name: PostSatelliteBuildCompleted_3
@@ -396,7 +396,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: 
+      max_time: '600'
   - field:
       aetype: state
       name: PostSatelliteBuildCompleted_4
@@ -416,7 +416,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: 
+      max_time: '600'
   - field:
       aetype: state
       name: PostSatelliteBuildCompleted_5
@@ -436,7 +436,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: 
+      max_time: '600'
   - field:
       aetype: state
       name: CheckFirstPuppetRunComplete
@@ -458,7 +458,7 @@ object:
       on_error: 'update_provision_status(status => ''Error waiting for first Puppet
         run: ${/#ae_reason}'')'
       max_retries: 
-      max_time: 
+      max_time: '1200'
   - field:
       aetype: state
       name: PostProvision
