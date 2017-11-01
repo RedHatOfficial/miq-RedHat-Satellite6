@@ -3,12 +3,12 @@ object_type: instance
 version: 1.0
 object:
   attributes:
-    display_name: Provision VM using Satellite with disk resizing, additional disks,
-      and LDAP CMDB
-    name: satellite_with_disk_resizing_and_additional_disks_and_ldap_cmdb
+    display_name: Provision VM using Satellite with dynamic pre-kickstart and post-kickstart
+      disks, and LDAP CMDB
+    name: satellite_with_dynamic_pre_kickstart_and_post_kickstart_disks_and_ldap_cmdb
     inherits: 
-    description: Provisions a new VM using Satellite PXE with the ability to resize
-      the primary disk, add additional disks, and register to an LDAP CMDB
+    description: Provisions a new VM using Satellite PXE with the ability to add disks
+      pre-kickstart and post-kickstart, and register to an LDAP CMDB
   fields:
   - Provision:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/Provision"
@@ -35,13 +35,13 @@ object:
       on_error: 'update_provision_status(status => ''Error waiting for VM IP Addresses:
         ${/#ae_reason}'')'
   - PostSatelliteBuildCompleted_2:
-      value: "/Integration/LDAP/StateMachines/UpdateLDAPEntryAttributes/Default"
-      on_entry: update_provision_status(status => 'Register to LDAP')
-      on_exit: update_provision_status(status => 'Registered to LDAP')
-      on_error: 'update_provision_status(status => ''Error registering to LDAP: ${/#ae_reason}'')'
-  - PostSatelliteBuildCompleted_3:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddDisksToVM_PostKickstart"
       on_entry: update_provision_status(status => 'Add additional disks post kickstart')
       on_exit: update_provision_status(status => 'Added additional disks post kickstart')
       on_error: 'update_provision_status(status => ''Error adding additional disks
         post kickstart: ${/#ae_reason}'')'
+  - PostSatelliteBuildCompleted_3:
+      value: "/Integration/LDAP/StateMachines/UpdateLDAPEntryAttributes/Default"
+      on_entry: update_provision_status(status => 'Register to LDAP')
+      on_exit: update_provision_status(status => 'Registered to LDAP')
+      on_error: 'update_provision_status(status => ''Error registering to LDAP: ${/#ae_reason}'')'
