@@ -19,11 +19,11 @@ object:
   - RegisterSatellite:
       value: "/Integration/Satellite/Operations/Methods/RegisterSatellite"
   - PostVMClone_1:
-      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/ResizeDisk"
-      on_entry: update_provision_status(status => 'Resize primary disk')
-      on_exit: update_provision_status(status => 'Resized primary disk')
-      on_error: 'update_provision_status(status => ''Error resizing primary disk:
-        ${/#ae_reason}'')'
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddDisksToVM_PreKickstart"
+      on_entry: update_provision_status(status => 'Add additional disks pre kickstart')
+      on_exit: update_provision_status(status => 'Added additional disks pre kickstart')
+      on_error: 'update_provision_status(status => ''Error adding additional disks
+        pre kickstart: ${/#ae_reason}'')'
   - StartVM:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/StartVM"
   - CheckSatelliteBuildCompleted:
@@ -40,8 +40,8 @@ object:
       on_exit: update_provision_status(status => 'Registered to LDAP')
       on_error: 'update_provision_status(status => ''Error registering to LDAP: ${/#ae_reason}'')'
   - PostSatelliteBuildCompleted_3:
-      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddDisksToVM"
-      on_entry: update_provision_status(status => 'Add additional disks')
-      on_exit: update_provision_status(status => 'Added additional disks')
-      on_error: 'update_provision_status(status => ''Error adding additional disks:
-        ${/#ae_reason}'')'
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddDisksToVM_PostKickstart"
+      on_entry: update_provision_status(status => 'Add additional disks post kickstart')
+      on_exit: update_provision_status(status => 'Added additional disks post kickstart')
+      on_error: 'update_provision_status(status => ''Error adding additional disks
+        post kickstart: ${/#ae_reason}'')'
