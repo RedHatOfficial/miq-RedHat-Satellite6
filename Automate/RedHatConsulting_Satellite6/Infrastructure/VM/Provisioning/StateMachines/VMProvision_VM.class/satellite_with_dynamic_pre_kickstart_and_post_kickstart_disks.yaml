@@ -1,0 +1,42 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: Provision VM using Satellite with dynamic pre-kickstart and post-kickstart
+      disks
+    name: satellite_with_dynamic_pre_kickstart_and_post_kickstart_disks
+    inherits: 
+    description: Provisions a new VM using Satellite PXE with the ability to add disks
+      pre-kickstart and post-kickstart
+  fields:
+  - Provision:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/Provision"
+  - CheckProvisioned:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/CheckProvisioned"
+  - AddToService:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddVMToService"
+  - RegisterSatellite:
+      value: "/Integration/Satellite/Operations/Methods/RegisterSatellite"
+  - PostVMClone_1:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddDisksToVM_PreKickstart"
+      on_entry: update_provision_status(status => 'Add additional disks pre kickstart')
+      on_exit: update_provision_status(status => 'Added additional disks pre kickstart')
+      on_error: 'update_provision_status(status => ''Error adding additional disks
+        pre kickstart: ${/#ae_reason}'')'
+  - StartVM:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/StartVM"
+  - CheckSatelliteBuildCompleted:
+      value: "/Integration/Satellite/Operations/Methods/CheckSatelliteBuildCompleted"
+  - PostSatelliteBuildCompleted_1:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/WaitForVMIPAddresses"
+      on_entry: update_provision_status(status => 'Wait for VM IP Addresses')
+      on_exit: update_provision_status(status => 'Wait for VM IP Addresses')
+      on_error: 'update_provision_status(status => ''Error waiting for VM IP Addresses:
+        ${/#ae_reason}'')'
+  - PostSatelliteBuildCompleted_2:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddDisksToVM_PostKickstart"
+      on_entry: update_provision_status(status => 'Add additional disks post kickstart')
+      on_exit: update_provision_status(status => 'Added additional disks post kickstart')
+      on_error: 'update_provision_status(status => ''Error adding additional disks
+        post kickstart: ${/#ae_reason}'')'
