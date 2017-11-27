@@ -53,10 +53,30 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: CheckPreRetirement
+      name: CheckStopped
       display_name: 
       datatype: string
       priority: 3
+      owner: 
+      default_value: "/Infrastructure/VM/Retirement/StateMachines/Methods/CheckStopped#${/#vm.vendor}"
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: update_retirement_status(status => 'Starting CheckStopped')
+      on_exit: update_retirement_status(status => 'CheckStopped successful')
+      on_error: update_retirement_status(status => 'Error in CheckPreRetirement')
+      max_retries: '100'
+      max_time: 
+  - field:
+      aetype: state
+      name: CheckPreRetirement
+      display_name: 
+      datatype: string
+      priority: 4
       owner: 
       default_value: "/Infrastructure/VM/Retirement/StateMachines/Methods/CheckPreRetirement#${/#vm.vendor}"
       substitute: true
@@ -76,7 +96,7 @@ object:
       name: DeactivateCMDB
       display_name: 
       datatype: string
-      priority: 4
+      priority: 5
       owner: 
       default_value: 
       substitute: true
@@ -96,7 +116,7 @@ object:
       name: UnregisterSatellite
       display_name: 
       datatype: string
-      priority: 5
+      priority: 6
       owner: 
       default_value: 
       substitute: true
@@ -116,7 +136,7 @@ object:
       name: UnregisterDHCP
       display_name: 
       datatype: string
-      priority: 6
+      priority: 7
       owner: 
       default_value: 
       substitute: true
@@ -136,7 +156,7 @@ object:
       name: UnregisterAD
       display_name: 
       datatype: string
-      priority: 7
+      priority: 8
       owner: 
       default_value: 
       substitute: true
@@ -156,7 +176,7 @@ object:
       name: UnregisterDNS
       display_name: 
       datatype: string
-      priority: 8
+      priority: 9
       owner: 
       default_value: 
       substitute: true
@@ -176,7 +196,7 @@ object:
       name: ReleaseMACAddress
       display_name: 
       datatype: string
-      priority: 9
+      priority: 10
       owner: 
       default_value: 
       substitute: true
@@ -196,7 +216,7 @@ object:
       name: ReleaseIPAddress
       display_name: 
       datatype: string
-      priority: 10
+      priority: 11
       owner: 
       default_value: 
       substitute: true
@@ -216,7 +236,7 @@ object:
       name: PreDeleteFromProvider
       display_name: 
       datatype: string
-      priority: 11
+      priority: 12
       owner: 
       default_value: "#/Infrastructure/VM/Retirement/StateMachines/Methods/PreDeleteFromProvider"
       substitute: true
@@ -236,7 +256,7 @@ object:
       name: RemoveFromProvider
       display_name: 
       datatype: string
-      priority: 12
+      priority: 13
       owner: 
       default_value: "/Infrastructure/VM/Retirement/StateMachines/Methods/RemoveFromProvider"
       substitute: true
@@ -256,7 +276,7 @@ object:
       name: PreDeleteEmailOwner
       display_name: 
       datatype: string
-      priority: 13
+      priority: 14
       owner: 
       default_value: "#/Infrastructure/VM/Retirement/Email/vm_retirement_emails?event=vm_entered_retirement"
       substitute: true
@@ -276,7 +296,7 @@ object:
       name: EmailOwner
       display_name: 
       datatype: string
-      priority: 14
+      priority: 15
       owner: 
       default_value: "/Infrastructure/VM/Retirement/Email/vm_retirement_emails?event=vm_retired"
       substitute: true
@@ -296,7 +316,7 @@ object:
       name: CheckRemovedFromProvider
       display_name: 
       datatype: string
-      priority: 15
+      priority: 16
       owner: 
       default_value: "/Infrastructure/VM/Retirement/StateMachines/Methods/CheckDeletedFromProvider"
       substitute: true
@@ -316,7 +336,7 @@ object:
       name: FinishRetirement
       display_name: 
       datatype: string
-      priority: 16
+      priority: 17
       owner: 
       default_value: "/Infrastructure/VM/Retirement/StateMachines/Methods/FinishRetirement"
       substitute: true
@@ -336,7 +356,7 @@ object:
       name: DeleteFromVMDB
       display_name: 
       datatype: string
-      priority: 17
+      priority: 18
       owner: 
       default_value: "#/Infrastructure/VM/Retirement/StateMachines/Methods/DeleteFromVMDB"
       substitute: true
