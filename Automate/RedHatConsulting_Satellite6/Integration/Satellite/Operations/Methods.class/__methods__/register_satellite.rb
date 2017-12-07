@@ -104,8 +104,12 @@ begin
   $evm.log(:info, "new_host_request => #{new_host_request}")
   
   # create Satellite Host record
-  satellite_host_record = satellite_api.resource(:hosts).call(:create, { :host => new_host_request })
-  $evm.log(:info, "satellite_host_record => #{satellite_host_record}")
+  begin
+    satellite_host_record = satellite_api.resource(:hosts).call(:create, { :host => new_host_request })
+    $evm.log(:info, "satellite_host_record => #{satellite_host_record}")
+  rescue => e
+    error("Error creating Satellite host record: #{e.message}")
+  end
   
   # store the satellite host record id for future use in provisioning and future retirment
   prov.set_option(:satellite_host_id, satellite_host_record['id'])
