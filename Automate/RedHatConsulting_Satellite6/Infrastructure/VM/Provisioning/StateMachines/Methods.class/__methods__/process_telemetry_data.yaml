@@ -1,0 +1,12 @@
+---
+object_type: method
+version: 1.0
+object:
+  attributes:
+    name: process_telemetry_data
+    display_name: ProcessTelemetryData
+    description: 
+    scope: instance
+    language: ruby
+    location: inline
+  inputs: []
