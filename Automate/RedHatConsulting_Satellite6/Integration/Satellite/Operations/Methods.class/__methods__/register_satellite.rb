@@ -107,7 +107,9 @@ begin
   begin
     satellite_host_record = satellite_api.resource(:hosts).call(:create, { :host => new_host_request })
     $evm.log(:info, "satellite_host_record => #{satellite_host_record}")
-  rescue => e
+  rescue RestClient::UnprocessableEntity => e
+    error("Received an UnprocessableEntity error from Satellite. This is often caused by hostgroup issues.")
+  rescue Exception => e
     error("Error creating Satellite host record: #{e.message}")
   end
   
