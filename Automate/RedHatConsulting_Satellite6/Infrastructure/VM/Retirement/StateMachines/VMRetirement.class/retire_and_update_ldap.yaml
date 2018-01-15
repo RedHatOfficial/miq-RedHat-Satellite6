@@ -3,8 +3,8 @@ object_type: instance
 version: 1.0
 object:
   attributes:
-    display_name: 
-    name: Default
+    display_name: Retire and Update LDAP
+    name: Retire_and_Update_LDAP
     inherits: 
     description: 
   fields:
@@ -18,6 +18,6 @@ object:
   - CheckRemovedFromProvider:
       value: "/Infrastructure/VM/Retirement/StateMachines/Methods/CheckRemovedFromProvider"
   - UpdateLDAP:
-      value: "#/Integration/LDAP/StateMachines/UpdateLDAPEntryAttributes/Default"
+      value: "/Integration/LDAP/StateMachines/UpdateLDAPEntryAttributes/Default"
   - DeleteFromVMDB:
       value: "#/Infrastructure/VM/Retirement/StateMachines/Methods/DeleteFromVMDB"

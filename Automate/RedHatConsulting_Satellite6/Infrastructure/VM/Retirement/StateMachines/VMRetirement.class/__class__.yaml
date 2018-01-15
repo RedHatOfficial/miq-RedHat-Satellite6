@@ -333,10 +333,31 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: DeleteFromVMDB
+      name: UpdateLDAP
       display_name: 
       datatype: string
       priority: 17
+      owner: 
+      default_value: "#/Integration/LDAP/StateMachines/UpdateLDAPEntryAttributes/Default"
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: update_retirement_status(status => 'Updating LDAP Retirement Status')
+      on_exit: update_retirement_status(status => 'Updated LDAP Retirement Status')
+      on_error: update_retirement_status(status => 'Failed to Update LDAP Retirement
+        Status')
+      max_retries: '100'
+      max_time: 
+  - field:
+      aetype: state
+      name: DeleteFromVMDB
+      display_name: 
+      datatype: string
+      priority: 18
       owner: 
       default_value: "#/Infrastructure/VM/Retirement/StateMachines/Methods/DeleteFromVMDB"
       substitute: true
