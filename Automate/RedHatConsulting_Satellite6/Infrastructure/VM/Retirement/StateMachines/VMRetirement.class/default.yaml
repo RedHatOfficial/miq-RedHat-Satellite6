@@ -17,7 +17,7 @@ object:
       value: "/Infrastructure/VM/Retirement/StateMachines/Methods/RemoveFromProvider"
   - CheckRemovedFromProvider:
       value: "/Infrastructure/VM/Retirement/StateMachines/Methods/CheckRemovedFromProvider"
-  - UpdateLDAP:
-      value: "#/Integration/LDAP/StateMachines/UpdateLDAPEntryAttributes/Default"
+  - DeactivateCMDB:
+      value: "/Integration/LDAP/StateMachines/UpdateLDAPEntryAttributes/Default"
   - DeleteFromVMDB:
       value: "#/Infrastructure/VM/Retirement/StateMachines/Methods/DeleteFromVMDB"
