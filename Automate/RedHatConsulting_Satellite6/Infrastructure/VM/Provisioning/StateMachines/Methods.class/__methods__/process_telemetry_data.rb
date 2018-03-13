@@ -30,8 +30,8 @@ def get_duration(start_time, end_time)
   end_time   = $evm.get_state_var(end_time)   if end_time.class   == Symbol
   
   if start_time && end_time
-    current_time_zone = Time.now.zone
-    duration = seconds_to_time(end_time.in_time_zone(current_time_zone) - start_time.in_time_zone(current_time_zone))
+    duration = seconds_to_time(end_time.in_time_zone("UTC") - start_time.in_time_zone("UTC"))
+
   else
     duration = 'Unknown'
   end
@@ -63,9 +63,9 @@ begin
   # NOTE: Satellite 6 specific
   duration_wait_for_satellite_build_completed = get_duration(:vm_provisioning_telemetry_on_exit_StartVM, :vm_provisioning_telemetry_on_exit_CheckSatelliteBuildCompleted)
   
-  set_provisioning_telemetry_custom_attribute(vm, 'Time: Request Created',               prov.created_on.in_time_zone(now.zone))
+  set_provisioning_telemetry_custom_attribute(vm, 'Time: Request Created',               prov.created_on.localtime)
   set_provisioning_telemetry_custom_attribute(vm, 'Time: Request Completed',             now)
-  set_provisioning_telemetry_custom_attribute(vm, 'Hour: Request Created',               prov.created_on.in_time_zone(now.zone).hour)
+  set_provisioning_telemetry_custom_attribute(vm, 'Hour: Request Created',               prov.created_on.localtime.hour)
   set_provisioning_telemetry_custom_attribute(vm, 'Duration: Task Queue',                duration_task_queue)
   set_provisioning_telemetry_custom_attribute(vm, 'Duration: Total VM Provisioning',     duration_vm_provisioning)
   set_provisioning_telemetry_custom_attribute(vm, 'Duration: VM Clone',                  duration_vm_clone)
