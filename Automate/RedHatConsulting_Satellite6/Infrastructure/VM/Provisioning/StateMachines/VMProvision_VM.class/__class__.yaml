@@ -160,7 +160,7 @@ object:
       datatype: string
       priority: 8
       owner: 
-      default_value: 
+      default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddVMToService"
       substitute: true
       message: create
       visibility: 
