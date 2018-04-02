@@ -3,7 +3,7 @@ object_type: method
 version: 1.0
 object:
   attributes:
-    name: set_satellite_options
+    name: set_custom_provision_task_options
     display_name: 
     description: 
     scope: instance
