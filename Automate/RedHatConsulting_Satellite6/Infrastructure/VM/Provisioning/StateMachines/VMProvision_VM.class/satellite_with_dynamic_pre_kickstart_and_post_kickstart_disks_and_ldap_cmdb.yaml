@@ -14,8 +14,6 @@ object:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/Provision"
   - CheckProvisioned:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/CheckProvisioned"
-  - AddToService:
-      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddVMToService"
   - RegisterSatellite:
       value: "/Integration/Satellite/Operations/Methods/RegisterSatellite"
   - PostVMClone_1:
