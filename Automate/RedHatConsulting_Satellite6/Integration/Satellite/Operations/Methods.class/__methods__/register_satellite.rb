@@ -2,13 +2,11 @@
 # The created host record is in build mode.
 #
 # EXPECTED
-#   EVM ROOT
-#     miq_provision - VM Provisining request to create the Satellite host record for.
-#       required options:
-#         satellite_organization_id - Satellite Organization ID to register the VM with
-#         satellite_location_id     - Satellite Location ID to register the VM with
-#         satellite_hostgroup_id    - Satellite Hostgroup ID to register the VM with
-#         satellite_domain_id       - Satellite Domain ID to register the VM with
+# @param miq_provision             Required. VM Provisining request to create the Satellite host record for.
+# @param satellite_organization_id Required. Satellite Organization ID to register the VM with
+# @param satellite_hostgroup_id    Required. Satellite Hostgroup ID to register the VM with
+# @param satellite_domain_id       Required. Satellite Domain ID to register the VM with
+# @param satellite_location_id     Optional. Satellite Location ID to register the VM with
 #
 # @see https://www.theforeman.org/api/1.14/index.html - POST /api/hosts 
 #
@@ -50,6 +48,15 @@ def get_satellite_api()
   return satellite_api
 end
 
+# Takes a string and makes it a valid tag name
+#
+# @param str String to turn into a valid Tag name
+#
+# @return Given string transformed into a valid Tag name
+def to_tag_name(str)
+  return str.downcase.gsub(/[^a-z0-9_]+/,'_')
+end
+
 begin
   satellite_api = get_satellite_api()
   
@@ -74,11 +81,37 @@ begin
   satellite_hostgroup_id    = prov.get_option(:satellite_hostgroup_id)    || prov.get_option(:ws_values)[:satellite_hostgroup_id]
   satellite_domain_id       = prov.get_option(:satellite_domain_id)       || prov.get_option(:ws_values)[:satellite_domain_id]
   
-  error("Required miq_provision option <satellite_organization_id> not found") if satellite_organization_id.nil?
-  error("Required miq_provision option <satellite_location_id> not found")     if satellite_location_id.nil?
-  error("Required miq_provision option <satellite_hostgroup_id> not found")    if satellite_hostgroup_id.nil?
-  error("Required miq_provision option <satellite_domain_id> not found")       if satellite_domain_id.nil?
+  error("Required miq_provision option <satellite_organization_id> not found") if satellite_organization_id.blank?
+  error("Required miq_provision option <satellite_hostgroup_id> not found")    if satellite_hostgroup_id.blank?
+  error("Required miq_provision option <satellite_domain_id> not found")       if satellite_domain_id.blank?
+  
+  # if satellite location id not set as a provisioning option then
+  #   determine if VM owning provider has a location tag, and if so, use that
+  if satellite_location_id.blank?
+    provider               = vm.ext_management_system
+    provider_location_tags = provider.tags(:location)
+    $evm.log(:info, "provider_location_tags => #{provider_location_tags}") if @DEBUG
+    
+    location_index = satellite_api.resource(:locations).call(:index)
+    $evm.log(:info, "location_index => #{location_index}") if @DEBUG
+    satellite_location = nil
+    provider_location_tags.each do |tag|
+      satellite_location = location_index['results'].find { |location| to_tag_name(location['name']) == tag }
+      break if !satellite_location.blank?
+    end
+    
+    if !satellite_location.blank?
+      satellite_location_id = satellite_location['id']
+    end
+  end
+  error("Either miq_provision option <satellite_location_id> or a <:location> Tag on the VM provider matching a Satellite Location must be set.") if satellite_location_id.blank?
 
+  $evm.log(:info, "satellite_organization_id => #{satellite_organization_id}") if @DEBUG
+  $evm.log(:info, "satellite_hostgroup_id    => #{satellite_hostgroup_id}")    if @DEBUG
+  $evm.log(:info, "satellite_domain_id       => #{satellite_domain_id}")       if @DEBUG
+  $evm.log(:info, "satellite_location_id     => #{satellite_location_id}")     if @DEBUG
+  
+  # create the new host request
   new_host_request = {
     :name                  => name,
     :organization_id       => satellite_organization_id,
