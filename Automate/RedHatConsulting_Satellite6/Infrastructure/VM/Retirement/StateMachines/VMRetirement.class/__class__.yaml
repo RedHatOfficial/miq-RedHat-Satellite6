@@ -178,7 +178,7 @@ object:
       datatype: string
       priority: 9
       owner: 
-      default_value: 
+      default_value: "/Integration/Infoblox/Operations/Methods/ReleaseIPAddress"
       substitute: true
       message: create
       visibility: 
@@ -186,9 +186,9 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: ''
-      on_exit: ''
-      on_error: ''
+      on_entry: update_retirement_status(status => 'Releasing IP Address')
+      on_exit: update_retirement_status(status => 'Released IP Address')
+      on_error: update_retirement_status(status => 'Error Releasing IP Address')
       max_retries: '100'
       max_time: 
   - field:
