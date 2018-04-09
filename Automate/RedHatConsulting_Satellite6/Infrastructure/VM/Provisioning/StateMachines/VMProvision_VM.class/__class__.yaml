@@ -33,30 +33,10 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: AcquireIPAddress
-      display_name: 
-      datatype: string
-      priority: 2
-      owner: 
-      default_value: 
-      substitute: true
-      message: create
-      visibility: 
-      collect: 
-      scope: 
-      description: 
-      condition: 
-      on_entry: ''
-      on_exit: ''
-      on_error: ''
-      max_retries: '100'
-      max_time: 
-  - field:
-      aetype: state
       name: Placement
       display_name: 
       datatype: string
-      priority: 3
+      priority: 2
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/Placement/default#${/#miq_provision.source.vendor}"
       substitute: true
@@ -76,7 +56,7 @@ object:
       name: PreProvision
       display_name: 
       datatype: string
-      priority: 4
+      priority: 3
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/PreProvision#${/#miq_provision.source.vendor}"
       substitute: true
@@ -97,7 +77,7 @@ object:
       name: Provision
       display_name: 
       datatype: string
-      priority: 5
+      priority: 4
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/Provision"
       substitute: true
@@ -117,7 +97,7 @@ object:
       name: CheckProvisioned
       display_name: 
       datatype: string
-      priority: 6
+      priority: 5
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/CheckProvisioned"
       substitute: true
@@ -137,7 +117,7 @@ object:
       name: WaitForVMMACAddresses
       display_name: ''
       datatype: string
-      priority: 7
+      priority: 6
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/WaitForVMMACAddresses"
       substitute: true
@@ -158,9 +138,9 @@ object:
       name: AddToService
       display_name: 
       datatype: string
-      priority: 8
+      priority: 7
       owner: 
-      default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddVMToService"
+      default_value: 
       substitute: true
       message: create
       visibility: 
@@ -172,6 +152,26 @@ object:
       on_exit: update_provision_status(status => 'Added to service')
       on_error: 'update_provision_status(status => ''Error adding to service: ${/#ae_reason}'')'
       max_retries: 
+      max_time: 
+  - field:
+      aetype: state
+      name: AcquireIPAddress
+      display_name: 
+      datatype: string
+      priority: 8
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: update_provision_status(status => 'Assigning IP')
+      on_exit: update_provision_status(status => 'Assigned IP')
+      on_error: 'update_provision_status(status => ''Error assigning IP: ${/#ae_reason}'')'
+      max_retries: '100'
       max_time: 
   - field:
       aetype: state
