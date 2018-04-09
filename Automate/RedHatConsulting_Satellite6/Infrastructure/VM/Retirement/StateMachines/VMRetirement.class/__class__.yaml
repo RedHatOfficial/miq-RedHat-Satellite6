@@ -178,7 +178,7 @@ object:
       datatype: string
       priority: 9
       owner: 
-      default_value: "/Integration/Infoblox/Operations/Methods/ReleaseIPAddress"
+      default_value: 
       substitute: true
       message: create
       visibility: 
