@@ -1,4 +1,4 @@
-# NOTE: DEPRICATED!!!!!
+# NOTE: DEPRECATED!!!!!
 #
 #
 # This method is intended to set provision options related to Satellite based provisioning on the VM Provision tasks
