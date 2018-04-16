@@ -1,4 +1,4 @@
-# NOTE: DEPRICATED!!!!!
+# NOTE: DEPRECATED!!!!!
 #
 #
 # Sets :custom_provision_type option on all of the miq_provision_request objects associated with the current service_template_provision_task.
