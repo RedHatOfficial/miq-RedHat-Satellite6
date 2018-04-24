@@ -16,6 +16,8 @@ object:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/CheckProvisioned"
   - AddToService:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddVMToService"
+  - AcquireIPAddress:
+      value: "/Infrastructure/Network/Operations/Methods/AcquireIPAddress?network_name_parameter_name=destination_network"
   - RegisterSatellite:
       value: "/Integration/Satellite/Operations/Methods/RegisterSatellite"
   - PostVMClone_1:
