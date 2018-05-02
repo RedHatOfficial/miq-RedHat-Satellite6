@@ -57,7 +57,7 @@ begin
   $evm.log(:info, "hostgroups_index = #{hostgroups_index}") if @DEBUG
   
   dialog_field               = $evm.object
-  dialog_field["sort_by"]    = "value"
+  dialog_field["sort_by"]    = "description"
   dialog_field["sort_order"] = "ascending"
   dialog_field["data_type"]  = "integer"
   dialog_field["required"]   = true
