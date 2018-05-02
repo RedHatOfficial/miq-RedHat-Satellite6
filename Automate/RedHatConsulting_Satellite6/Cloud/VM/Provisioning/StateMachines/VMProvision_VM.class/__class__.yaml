@@ -213,12 +213,12 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: PostVMClone_1
+      name: AddToService
       display_name: 
       datatype: string
       priority: 11
       owner: 
-      default_value: 
+      default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddVMToService"
       substitute: true
       message: create
       visibility: 
@@ -226,14 +226,14 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
+      on_entry: update_provision_status(status => 'Add to service')
+      on_exit: update_provision_status(status => 'Added to service')
+      on_error: 'update_provision_status(status => ''Error adding to service: ${/#ae_reason}'')'
       max_retries: 
-      max_time: '600'
+      max_time: 
   - field:
       aetype: state
-      name: PostVMClone_2
+      name: PostVMClone_1
       display_name: 
       datatype: string
       priority: 12
@@ -253,7 +253,7 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: PostVMClone_3
+      name: PostVMClone_2
       display_name: 
       datatype: string
       priority: 13
@@ -273,7 +273,7 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: PostVMClone_4
+      name: PostVMClone_3
       display_name: 
       datatype: string
       priority: 14
@@ -293,7 +293,7 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: PostVMClone_5
+      name: PostVMClone_4
       display_name: 
       datatype: string
       priority: 15
@@ -313,10 +313,30 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: CheckBuildCompleted
+      name: PostVMClone_5
       display_name: 
       datatype: string
       priority: 16
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: '600'
+  - field:
+      aetype: state
+      name: CheckBuildCompleted
+      display_name: 
+      datatype: string
+      priority: 17
       owner: 
       default_value: 
       substitute: true
@@ -336,7 +356,7 @@ object:
       name: PostBuildCompleted_1
       display_name: 
       datatype: string
-      priority: 17
+      priority: 18
       owner: 
       default_value: 
       substitute: true
@@ -356,7 +376,7 @@ object:
       name: PostBuildCompleted_2
       display_name: 
       datatype: string
-      priority: 18
+      priority: 19
       owner: 
       default_value: 
       substitute: true
@@ -376,7 +396,7 @@ object:
       name: PostBuildCompleted_3
       display_name: 
       datatype: string
-      priority: 19
+      priority: 20
       owner: 
       default_value: 
       substitute: true
@@ -396,7 +416,7 @@ object:
       name: PostBuildCompleted_4
       display_name: 
       datatype: string
-      priority: 20
+      priority: 21
       owner: 
       default_value: 
       substitute: true
@@ -416,7 +436,7 @@ object:
       name: PostBuildCompleted_5
       display_name: 
       datatype: string
-      priority: 21
+      priority: 22
       owner: 
       default_value: 
       substitute: true
@@ -436,7 +456,7 @@ object:
       name: EmailOwner
       display_name: 
       datatype: string
-      priority: 22
+      priority: 23
       owner: 
       default_value: "/Cloud/VM/Provisioning/Email/MiqProvision_Complete?event=vm_provisioned"
       substitute: true
@@ -456,7 +476,7 @@ object:
       name: Finished
       display_name: 
       datatype: string
-      priority: 23
+      priority: 24
       owner: 
       default_value: "/System/CommonMethods/StateMachineMethods/vm_provision_finished"
       substitute: true
