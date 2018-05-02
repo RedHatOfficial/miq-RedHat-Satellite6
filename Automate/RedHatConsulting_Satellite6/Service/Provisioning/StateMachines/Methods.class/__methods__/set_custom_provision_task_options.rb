@@ -13,7 +13,6 @@ require 'apipie-bindings'
 # @return Hash of custom vm_fields to set on any vm provisioning requests created for the service being created
 def get_custom_vm_fields(dialog_options)
   custom_vm_fields = {
-    :placement_auto => true,
     :vm_auto_start  => false,
     :vm_name        => 'changeme'
   }
