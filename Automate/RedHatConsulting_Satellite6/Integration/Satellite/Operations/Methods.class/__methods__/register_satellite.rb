@@ -274,7 +274,7 @@ begin
        $evm.log(:warn, "Found more then one Satellite Subnet for network address <#{network_address}> with network netmask <#{network_netmask}> " +
                        "in Satelllite Organization <#{satellite_organization_id}>, in Satellite Location <#{satellite_location_id}>, " +
                        "in Satellite Domain <#{satellite_domain_id}>. " +
-                       "Ignore, will use first resultin new host record creation.")
+                       "Ignore, will use first result in new host record creation.")
     end
   end
   
