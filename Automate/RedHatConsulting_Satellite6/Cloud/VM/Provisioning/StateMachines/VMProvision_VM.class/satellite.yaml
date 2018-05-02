@@ -1,0 +1,33 @@
+---
+object_type: instance
+version: 1.0
+object:
+  attributes:
+    display_name: Provision VM using Satellite
+    name: satellite
+    inherits: 
+    description: 
+  fields:
+  - PreProvision_2:
+      value: "/Integration/Satellite/Operations/Methods/RegisterSatellite"
+      on_entry: update_provision_status(status => 'Creating Satellite Host Entry')
+      on_exit: update_provision_status(status => 'Created Satellite Host Entry')
+      on_error: 'update_provision_status(status => ''Error creating Satellite Host
+        Entry: ${/#ae_reason}'')'
+  - PreProvision_3:
+      value: "/Integration/Satellite/Operations/Methods/SetUserData"
+      on_entry: update_provision_status(status => 'Setting User Data')
+      on_exit: update_provision_status(status => 'Set User Data')
+      on_error: 'update_provision_status(status => ''Error Setting User Data: ${/#ae_reason}'')'
+  - Provision:
+      value: "/Cloud/VM/Provisioning/StateMachines/Methods/Provision"
+  - CheckProvisioned:
+      value: "/Cloud/VM/Provisioning/StateMachines/Methods/CheckProvisioned"
+  - CheckBuildCompleted:
+      value: "/Integration/Satellite/Operations/Methods/CheckSatelliteBuildCompleted"
+      on_entry: update_provision_status(status => 'Waiting for VM Satellite Build
+        to Complete')
+      on_exit: update_provision_status(status => 'Waiting for VM Satellite Build to
+        Complete')
+      on_error: update_provision_status(status => 'Waiting for VM Satellite Build
+        to Complete')

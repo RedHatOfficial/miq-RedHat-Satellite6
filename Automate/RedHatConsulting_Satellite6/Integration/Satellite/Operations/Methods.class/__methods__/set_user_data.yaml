@@ -1,0 +1,12 @@
+---
+object_type: method
+version: 1.0
+object:
+  attributes:
+    name: set_user_data
+    display_name: SetUserData
+    description: 
+    scope: instance
+    language: ruby
+    location: inline
+  inputs: []
