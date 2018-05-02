@@ -53,7 +53,7 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: PreProvision
+      name: PreProvision_1
       display_name: 
       datatype: string
       priority: 3
@@ -74,10 +74,90 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: Provision
+      name: PreProvision_2
       display_name: 
       datatype: string
       priority: 4
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: state
+      name: PreProvision_3
+      display_name: 
+      datatype: string
+      priority: 5
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: state
+      name: PreProvision_4
+      display_name: 
+      datatype: string
+      priority: 6
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: state
+      name: PreProvision_5
+      display_name: 
+      datatype: string
+      priority: 7
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: state
+      name: Provision
+      display_name: 
+      datatype: string
+      priority: 8
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/Provision"
       substitute: true
@@ -97,7 +177,7 @@ object:
       name: CheckProvisioned
       display_name: 
       datatype: string
-      priority: 5
+      priority: 9
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/CheckProvisioned"
       substitute: true
@@ -117,7 +197,7 @@ object:
       name: WaitForVMMACAddresses
       display_name: ''
       datatype: string
-      priority: 6
+      priority: 10
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/WaitForVMMACAddresses"
       substitute: true
@@ -138,7 +218,7 @@ object:
       name: AddToService
       display_name: 
       datatype: string
-      priority: 7
+      priority: 11
       owner: 
       default_value: 
       substitute: true
@@ -158,7 +238,7 @@ object:
       name: AcquireIPAddress
       display_name: 
       datatype: string
-      priority: 8
+      priority: 12
       owner: 
       default_value: 
       substitute: true
@@ -175,88 +255,7 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: RegisterSatellite
-      display_name: 
-      datatype: string
-      priority: 9
-      owner: 
-      default_value: 
-      substitute: true
-      message: create
-      visibility: 
-      collect: 
-      scope: 
-      description: 
-      condition: 
-      on_entry: update_provision_status(status => 'Creating Satellite Host Entry')
-      on_exit: update_provision_status(status => 'Created Satellite Host Entry')
-      on_error: 'update_provision_status(status => ''Error creating Satellite Host
-        Entry: ${/#ae_reason}'')'
-      max_retries: 
-      max_time: 
-  - field:
-      aetype: state
       name: PostVMClone_1
-      display_name: 
-      datatype: string
-      priority: 10
-      owner: 
-      default_value: 
-      substitute: true
-      message: create
-      visibility: 
-      collect: 
-      scope: 
-      description: 
-      condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
-      max_retries: ''
-      max_time: '600'
-  - field:
-      aetype: state
-      name: PostVMClone_2
-      display_name: 
-      datatype: string
-      priority: 11
-      owner: 
-      default_value: 
-      substitute: true
-      message: create
-      visibility: 
-      collect: 
-      scope: 
-      description: 
-      condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
-      max_retries: ''
-      max_time: '600'
-  - field:
-      aetype: state
-      name: PostVMClone_3
-      display_name: 
-      datatype: string
-      priority: 12
-      owner: 
-      default_value: 
-      substitute: true
-      message: create
-      visibility: 
-      collect: 
-      scope: 
-      description: 
-      condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
-      max_retries: ''
-      max_time: '600'
-  - field:
-      aetype: state
-      name: PostVMClone_4
       display_name: 
       datatype: string
       priority: 13
@@ -276,7 +275,7 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: PostVMClone_5
+      name: PostVMClone_2
       display_name: 
       datatype: string
       priority: 14
@@ -296,12 +295,12 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: StartVM
+      name: PostVMClone_3
       display_name: 
       datatype: string
       priority: 15
       owner: 
-      default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/StartVM"
+      default_value: 
       substitute: true
       message: create
       visibility: 
@@ -309,19 +308,19 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: update_provision_status(status => 'Starting VM')
-      on_exit: update_provision_status(status => 'Started VM')
-      on_error: 'update_provision_status(status => ''Error starting VM: ${/#ae_reason}'')'
-      max_retries: 
-      max_time: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: '600'
   - field:
       aetype: state
-      name: CheckSatelliteBuildCompleted
+      name: PostVMClone_4
       display_name: 
       datatype: string
       priority: 16
       owner: 
-      default_value: "/Integration/Satellite/Operations/Methods/CheckSatelliteBuildCompleted"
+      default_value: 
       substitute: true
       message: create
       visibility: 
@@ -329,17 +328,14 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: update_provision_status(status => 'Waiting for VM Satellite Build
-        to Complete')
-      on_exit: update_provision_status(status => 'Waiting for VM Satellite Build to
-        Complete')
-      on_error: 'update_provision_status(status => ''Error waiting for VM Satellite
-        Build to Complete: ${/#ae_reason}'')'
-      max_retries: 
-      max_time: '3600'
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: '600'
   - field:
       aetype: state
-      name: PostSatelliteBuildCompleted_1
+      name: PostVMClone_5
       display_name: 
       datatype: string
       priority: 17
@@ -359,12 +355,12 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: PostSatelliteBuildCompleted_2
+      name: StartVM
       display_name: 
       datatype: string
       priority: 18
       owner: 
-      default_value: 
+      default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/StartVM"
       substitute: true
       message: create
       visibility: 
@@ -372,14 +368,14 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
-      max_retries: ''
-      max_time: '600'
+      on_entry: update_provision_status(status => 'Starting VM')
+      on_exit: update_provision_status(status => 'Started VM')
+      on_error: 'update_provision_status(status => ''Error starting VM: ${/#ae_reason}'')'
+      max_retries: 
+      max_time: 
   - field:
       aetype: state
-      name: PostSatelliteBuildCompleted_3
+      name: CheckBuildCompleted
       display_name: 
       datatype: string
       priority: 19
@@ -392,14 +388,14 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
-      max_retries: ''
-      max_time: '600'
+      on_entry: ''
+      on_exit: ''
+      on_error: ''
+      max_retries: 
+      max_time: '3600'
   - field:
       aetype: state
-      name: PostSatelliteBuildCompleted_4
+      name: PostBuildCompleted_1
       display_name: 
       datatype: string
       priority: 20
@@ -419,7 +415,7 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: PostSatelliteBuildCompleted_5
+      name: PostBuildCompleted_2
       display_name: 
       datatype: string
       priority: 21
@@ -439,7 +435,7 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: CheckFirstPuppetRunComplete
+      name: PostBuildCompleted_3
       display_name: 
       datatype: string
       priority: 22
@@ -452,19 +448,57 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: update_provision_status(status => 'Waiting for first Puppet run to
-        complete')
-      on_exit: update_provision_status(status => 'First Puppet run completed')
-      on_error: 'update_provision_status(status => ''Error waiting for first Puppet
-        run: ${/#ae_reason}'')'
-      max_retries: 
-      max_time: '1200'
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: '600'
+  - field:
+      aetype: state
+      name: PostBuildCompleted_4
+      display_name: 
+      datatype: string
+      priority: 23
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: '600'
+  - field:
+      aetype: state
+      name: PostBuildCompleted_5
+      display_name: 
+      datatype: string
+      priority: 24
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: ''
+      max_time: '600'
   - field:
       aetype: state
       name: PostProvision
       display_name: 
       datatype: string
-      priority: 23
+      priority: 25
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/PostProvision#${/#miq_provision.source.vendor}"
       substitute: true
@@ -485,7 +519,7 @@ object:
       name: EmailOwner
       display_name: 
       datatype: string
-      priority: 24
+      priority: 26
       owner: 
       default_value: "/Infrastructure/VM/Provisioning/Email/MiqProvision_Complete?event=vm_provisioned"
       substitute: true
@@ -505,7 +539,7 @@ object:
       name: Finished
       display_name: 
       datatype: string
-      priority: 25
+      priority: 27
       owner: 
       default_value: "/System/CommonMethods/StateMachineMethods/vm_provision_finished"
       substitute: true
