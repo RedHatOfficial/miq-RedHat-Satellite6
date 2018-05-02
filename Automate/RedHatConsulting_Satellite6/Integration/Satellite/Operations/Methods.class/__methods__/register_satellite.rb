@@ -207,7 +207,8 @@ begin
   miq_provision = $evm.root['miq_provision']
   satellite_api = get_satellite_api()
   vm,options    = get_vm_and_options()
-  vm_name       = vm ? vm.name : options[:vm_name]
+  vm_name       = vm ? vm.name : (options[:vm_target_name] || options[:vm_target_hostname] || options[:vm_name])
+  provider      = vm.nil? ? miq_provision.source.ext_management_system : vm.ext_management_system
   
   # get satellite options
   satellite_organization_id = options[:satellite_organization_id]
@@ -221,7 +222,6 @@ begin
   # if satellite location id not set as a provisioning option then
   #   determine if VM owning provider has a location tag, and if so, use that
   if satellite_location_id.blank?
-    provider               = vm.ext_management_system
     provider_location_tags = provider.tags(:location)
     $evm.log(:info, "provider_location_tags => #{provider_location_tags}") if @DEBUG
     
@@ -237,8 +237,8 @@ begin
       satellite_location_id = satellite_location['id']
     end
   end
-  error("Either miq_provision option <satellite_location_id> or a <:location> Tag on the VM provider matching a Satellite Location must be set.") if satellite_location_id.blank?
-  vm_mac                    = vm.nil? ? nil : vm.mac_addresses[0]
+  error("Either miq_provision option <satellite_location_id> or a <:location> Tag " +
+        "on the VM provider <#{provider.name}> matching a Satellite Location must be set.") if satellite_location_id.blank?
   
   $evm.log(:info, "satellite_organization_id => #{satellite_organization_id}") if @DEBUG
   $evm.log(:info, "satellite_hostgroup_id    => #{satellite_hostgroup_id}")    if @DEBUG
@@ -274,11 +274,12 @@ begin
        $evm.log(:warn, "Found more then one Satellite Subnet for network address <#{network_address}> with network netmask <#{network_netmask}> " +
                        "in Satelllite Organization <#{satellite_organization_id}>, in Satellite Location <#{satellite_location_id}>, " +
                        "in Satellite Domain <#{satellite_domain_id}>. " +
-                       "Ignore, will use first result in new host record creation.")
+                       "Ignore, will use first resultin new host record creation.")
     end
   end
   
   # create the new host request
+  vm_mac = vm.nil? ? nil : vm.mac_addresses[0]
   new_host_request = {
     :name                  => vm_name,
     :organization_id       => satellite_organization_id,
