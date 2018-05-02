@@ -56,5 +56,5 @@ begin
   dialog_field["data_type"]     = "integer"
   dialog_field["required"]      = true
   dialog_field['default_value'] = location_index['results'][0]['id']
-  dialog_field["values"]        = Hash[ *location_index['results'].collect { |item| [item['id'], item['name']] }.flatten ]
+  dialog_field["values"]        = Hash[ *location_index['results'].collect { |item| [item['id'], item['title']] }.flatten ]
 end

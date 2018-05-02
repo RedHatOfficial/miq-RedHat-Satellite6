@@ -89,7 +89,7 @@ begin
 
   location_index = satellite_api.resource(:locations).call(:index)
   $evm.log(:info, "location_index => #{location_index}") if @DEBUG
-  dialog_field_values = Hash[ *location_index['results'].collect { |item| [item['id'], item['name']] }.flatten ]
+  dialog_field_values = Hash[ *location_index['results'].collect { |item| [item['id'], item['title']] }.flatten ]
 
   $evm.log(:info, "dialog_field_values pre filtering: #{dialog_field_values}") if @DEBUG
   dialog_field_values.each do |id, name|
