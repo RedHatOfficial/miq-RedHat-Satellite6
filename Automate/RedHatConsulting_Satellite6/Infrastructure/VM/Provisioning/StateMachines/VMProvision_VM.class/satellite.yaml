@@ -16,9 +16,19 @@ object:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddVMToService"
   - AcquireIPAddress:
       value: "/Infrastructure/Network/Operations/Methods/AcquireIPAddress?network_name_parameter_name=destination_network"
-  - RegisterSatellite:
+  - PostVMClone_1:
       value: "/Integration/Satellite/Operations/Methods/RegisterSatellite"
+      on_entry: update_provision_status(status => 'Creating Satellite Host Entry')
+      on_exit: update_provision_status(status => 'Created Satellite Host Entry')
+      on_error: 'update_provision_status(status => ''Error creating Satellite Host
+        Entry: ${/#ae_reason}'')'
   - StartVM:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/StartVM"
-  - CheckSatelliteBuildCompleted:
+  - CheckBuildCompleted:
       value: "/Integration/Satellite/Operations/Methods/CheckSatelliteBuildCompleted"
+      on_entry: update_provision_status(status => 'Waiting for VM Satellite Build
+        to Complete')
+      on_exit: update_provision_status(status => 'Waiting for VM Satellite Build to
+        Complete')
+      on_error: 'update_provision_status(status => ''Error waiting for VM Satellite
+        Build to Complete: ${/#ae_reason}'')'

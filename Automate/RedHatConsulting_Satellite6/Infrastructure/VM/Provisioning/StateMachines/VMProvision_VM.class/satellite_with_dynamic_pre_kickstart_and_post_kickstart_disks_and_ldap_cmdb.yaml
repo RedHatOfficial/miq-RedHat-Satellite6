@@ -18,9 +18,13 @@ object:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddVMToService"
   - AcquireIPAddress:
       value: "/Infrastructure/Network/Operations/Methods/AcquireIPAddress?network_name_parameter_name=destination_network"
-  - RegisterSatellite:
-      value: "/Integration/Satellite/Operations/Methods/RegisterSatellite"
   - PostVMClone_1:
+      value: "/Integration/Satellite/Operations/Methods/RegisterSatellite"
+      on_entry: update_provision_status(status => 'Creating Satellite Host Entry')
+      on_exit: update_provision_status(status => 'Created Satellite Host Entry')
+      on_error: 'update_provision_status(status => ''Error creating Satellite Host
+        Entry: ${/#ae_reason}'')'
+  - PostVMClone_2:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddDisksToVM_PreKickstart"
       on_entry: update_provision_status(status => 'Add additional disks pre kickstart')
       on_exit: update_provision_status(status => 'Added additional disks pre kickstart')
@@ -28,21 +32,27 @@ object:
         pre kickstart: ${/#ae_reason}'')'
   - StartVM:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/StartVM"
-  - CheckSatelliteBuildCompleted:
+  - CheckBuildCompleted:
       value: "/Integration/Satellite/Operations/Methods/CheckSatelliteBuildCompleted"
-  - PostSatelliteBuildCompleted_1:
+      on_entry: update_provision_status(status => 'Waiting for VM Satellite Build
+        to Complete')
+      on_exit: update_provision_status(status => 'Waiting for VM Satellite Build to
+        Complete')
+      on_error: 'update_provision_status(status => ''Error waiting for VM Satellite
+        Build to Complete: ${/#ae_reason}'')'
+  - PostBuildCompleted_1:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/WaitForVMIPAddresses"
       on_entry: update_provision_status(status => 'Wait for VM IP Addresses')
       on_exit: update_provision_status(status => 'Wait for VM IP Addresses')
       on_error: 'update_provision_status(status => ''Error waiting for VM IP Addresses:
         ${/#ae_reason}'')'
-  - PostSatelliteBuildCompleted_2:
+  - PostBuildCompleted_2:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/AddDisksToVM_PostKickstart"
       on_entry: update_provision_status(status => 'Add additional disks post kickstart')
       on_exit: update_provision_status(status => 'Added additional disks post kickstart')
       on_error: 'update_provision_status(status => ''Error adding additional disks
         post kickstart: ${/#ae_reason}'')'
-  - PostSatelliteBuildCompleted_3:
+  - PostBuildCompleted_3:
       value: "/Integration/LDAP/StateMachines/UpdateLDAPEntryAttributes/Default"
       on_entry: update_provision_status(status => 'Register to LDAP')
       on_exit: update_provision_status(status => 'Registered to LDAP')
