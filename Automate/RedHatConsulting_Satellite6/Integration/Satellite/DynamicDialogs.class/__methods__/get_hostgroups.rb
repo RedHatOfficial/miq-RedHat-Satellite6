@@ -44,7 +44,16 @@ begin
   
   satellite_api = get_satellite_api()
   
-  hostgroups_index = satellite_api.resource(:hostgroups).call(:index)
+  satellite_environment_id = $evm.root['dialog_satellite_environment_id']
+  
+  hostgroups_search_string = ""
+  if satellite_environment_id
+    satellite_environment    = satellite_api.resource(:lifecycle_environments).call(:show, {:id => satellite_environment_id})
+    hostgroups_search_string = "lifecycle_environment = #{satellite_environment['name']}"
+  end
+  $evm.log(:info, "hostgroups_search_string => #{hostgroups_search_string}") if @DEBUG
+  
+  hostgroups_index = satellite_api.resource(:hostgroups).call(:index, {:search => hostgroups_search_string})
   $evm.log(:info, "hostgroups_index = #{hostgroups_index}") if @DEBUG
   
   dialog_field               = $evm.object
