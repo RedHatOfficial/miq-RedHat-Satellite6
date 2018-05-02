@@ -1,0 +1,53 @@
+---
+object_type: class
+version: 1.0
+object:
+  attributes:
+    description: DNS, DHCP, and/or IPAM (DDI) providers and their supported operations.
+    display_name: 
+    name: DDIProviders
+    type: 
+    inherits: 
+    visibility: 
+    owner: 
+  schema:
+  - field:
+      aetype: relationship
+      name: AcquireIPAddress
+      display_name: 
+      datatype: string
+      priority: 1
+      owner: 
+      default_value: 
+      substitute: true
+      message: acquire_ip_address
+      visibility: 
+      collect: "/acquired_ip_address = acquired_ip_address"
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
+      aetype: relationship
+      name: ReleaseIPAddress
+      display_name: 
+      datatype: string
+      priority: 2
+      owner: 
+      default_value: 
+      substitute: true
+      message: release_ip_address
+      visibility: 
+      collect: "/released_ip_address = release_ip_address"
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
