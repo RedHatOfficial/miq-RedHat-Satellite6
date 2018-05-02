@@ -8,16 +8,16 @@ object:
     inherits: 
     description: 
   fields:
-  - UnregisterSatellite:
-      value: "/Integration/Satellite/Operations/Methods/UnregisterSatellite"
-      on_entry: update_retirement_status(status => 'Unregistering from Satellite'')
-      on_exit: update_retirement_status(status => 'Unregistered from Satellite'')
-      on_error: update_retirement_status(status => 'Failed Unregistering from Satellite'')
   - ReleaseIPAddress:
       value: "/Infrastructure/Network/Operations/Methods/ReleaseIPAddress"
   - RemoveFromProvider:
       value: "/Infrastructure/VM/Retirement/StateMachines/Methods/RemoveFromProvider"
   - CheckRemovedFromProvider:
       value: "/Infrastructure/VM/Retirement/StateMachines/Methods/CheckRemovedFromProvider"
+  - UnregisterSatellite:
+      value: "/Integration/Satellite/Operations/Methods/UnregisterSatellite"
+      on_entry: update_retirement_status(status => 'Unregistering from Satellite'')
+      on_exit: update_retirement_status(status => 'Unregistered from Satellite'')
+      on_error: update_retirement_status(status => 'Failed Unregistering from Satellite'')
   - DeleteFromVMDB:
       value: "#/Infrastructure/VM/Retirement/StateMachines/Methods/DeleteFromVMDB"
