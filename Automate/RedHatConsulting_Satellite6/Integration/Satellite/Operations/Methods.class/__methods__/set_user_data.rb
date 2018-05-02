@@ -170,33 +170,45 @@ def get_satellite_api()
   return satellite_api
 end
 
-begin
-  satellite_api = get_satellite_api()
-  vm,options    = get_vm_and_options()
-  vm_name       = options[:vm_name]
-  
-  miq_provision = $evm.root['miq_provision']
-  error('Expected provisioning request not found') if miq_provision.nil?
-  
-  # find the satellite host record
+# Get the Satellite host record for a given host name
+#
+# @param satellite_api ApipieBinding Sattellite API object
+# @param name          String        Name of the host to find the Satelilte host record for
+#
+# @return Hash Satellite host record for the given host name returned from Satellite API
+def get_satellite_host_record(satellite_api, name)
   begin
-    satellite_index_result = satellite_api.resource(:hosts).call(:index, {:search => "#{vm_name}"})
+    satellite_index_result = satellite_api.resource(:hosts).call(:index, {:search => "#{name}"})
     if !satellite_index_result['results'].empty?
       satellite_host_record  = satellite_index_result['results'][0]
       
       # NOTE: hopefully this never happens
       # warn if found more then one result
       if satellite_index_result['results'].length > 1
-        $evm.log(:warn, "More then one Satellite host record found for VM <#{vm_name}>, using first one.")
+        $evm.log(:warn, "More then one Satellite host record found for Host <#{name}>, using first one.")
       end
     else
-      error("Could not find Satellite host entry for VM <#{vm_name}>")
+      error("Could not find Satellite host entry for Host <#{name}>")
     end
   rescue RestClient::UnprocessableEntity => e
-    error("Error finding Satellite host record for VM <#{vm_name}>. Received an UnprocessableEntity error from Satellite. Check /var/log/foreman/production.log on Satellite for more info.")
+    error("Error finding Satellite host record for Host <#{name}>. Received an UnprocessableEntity error from Satellite. Check /var/log/foreman/production.log on Satellite for more info.")
   rescue Exception => e
-    error("Error finding Satellite host record for VM <#{vm_name}>: #{e.message}")
+    error("Error finding Satellite host record for Host <#{name}>: #{e.message}")
   end
+  
+  return satellite_host_record
+end
+
+begin
+  satellite_api = get_satellite_api()
+  vm,options    = get_vm_and_options()
+  vm_name       = vm ? vm.name : (options[:vm_target_name] || options[:vm_target_hostname] || options[:vm_name])
+  
+  miq_provision = $evm.root['miq_provision']
+  error('Expected provisioning request not found') if miq_provision.nil?
+  
+  # find the satellite host record
+  satellite_host_record = get_satellite_host_record(satellite_api, vm_name)
   
   # find the satellite host record user data template
   begin
