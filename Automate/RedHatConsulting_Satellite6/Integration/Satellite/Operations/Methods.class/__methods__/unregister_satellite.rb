@@ -87,7 +87,7 @@ begin
   satellite_api         = get_satellite_api()
   satellite_host_record = get_satellite_host_record(satellite_api, vm.name)
   
-  # if found a satellite host record then retire it
+  # if a satellite host record is found, then retire it
   # else just ignore
   if !satellite_host_record.blank?
     satellite_host_id     = satellite_host_record['id']
