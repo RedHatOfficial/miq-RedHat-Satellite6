@@ -217,7 +217,6 @@ begin
   satellite_domain_id       = options[:satellite_domain_id]
   error("Required miq_provision option <satellite_organization_id> not found") if satellite_organization_id.blank?
   error("Required miq_provision option <satellite_hostgroup_id> not found")    if satellite_hostgroup_id.blank?
-  error("Required miq_provision option <satellite_domain_id> not found")       if satellite_domain_id.blank?
   
   # if satellite location id not set as a provisioning option then
   #   determine if VM owning provider has a location tag, and if so, use that
@@ -239,6 +238,22 @@ begin
   end
   error("Either miq_provision option <satellite_location_id> or a <:location> Tag " +
         "on the VM provider <#{provider.name}> matching a Satellite Location must be set.") if satellite_location_id.blank?
+  
+  if satellite_domain_id.blank?
+    domain_name = options[:domain_name]
+    $evm.log(:info, "domain_name => '#{domain_name}'") if @DEBUG
+    error("Either miq_provision option <satellite_domain_id> or <domain_name> must be provided.") if domain_name.blank?
+    
+
+    # query satellite for the domain id
+    satellite_domains = satellite_api.resource(:domains).call(:index)['results']
+    satellite_domain  = satellite_domains.find { |domain| domain['name'] == domain_name }
+    error("Could not find Satellite Domain <#{domain_name}>") if satellite_domain.nil?
+    
+    if !satellite_domain.blank?
+      satellite_domain_id = satellite_domain['id']
+    end
+  end
   
   $evm.log(:info, "satellite_organization_id => #{satellite_organization_id}") if @DEBUG
   $evm.log(:info, "satellite_hostgroup_id    => #{satellite_hostgroup_id}")    if @DEBUG
