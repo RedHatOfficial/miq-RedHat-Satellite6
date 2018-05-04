@@ -57,6 +57,7 @@ end
 #
 # @return Hash Satellite host record for the given host name returned from Satellite API
 def get_satellite_host_record(satellite_api, name)
+  satellite_host_record = nil
   begin
     satellite_index_result = satellite_api.resource(:hosts).call(:index, {:search => "#{name}"})
     if !satellite_index_result['results'].empty?
@@ -67,8 +68,6 @@ def get_satellite_host_record(satellite_api, name)
       if satellite_index_result['results'].length > 1
         $evm.log(:warn, "More then one Satellite host record found for Host <#{name}>, using first one.")
       end
-    else
-      error("Could not find Satellite host entry for Host <#{name}>")
     end
   rescue RestClient::UnprocessableEntity => e
     error("Error finding Satellite host record for Host <#{name}>. Received an UnprocessableEntity error from Satellite. Check /var/log/foreman/production.log on Satellite for more info.")
@@ -87,16 +86,23 @@ begin
   # get the satellite host record id
   satellite_api         = get_satellite_api()
   satellite_host_record = get_satellite_host_record(satellite_api, vm.name)
-  satellite_host_id     = satellite_host_record['id']
-  $evm.log(:info, "satellite_host_id => '#{satellite_host_id}'") if @DEBUG
   
-  begin
-    $evm.log(:info, "Unregister Satellite Host Record <#{satellite_host_id}> for Host <#{vm.name}>")
-    result = satellite_api.resource(:hosts).call(:destroy, { :id => satellite_host_id})
-    $evm.log(:info, "Unregistered Satellite Host Record <#{satellite_host_id}> for Host <#{vm.name}>")
-  rescue RestClient::NotFound
-    warn("No Satellite Host Record <#{satellite_host_id}> to unregister for Host <#{vm.name}>")
-  rescue => e
-    warn("Unexpected error when unregistering Satellite Host Record <#{satellite_host_id}> to unregister for Host <#{vm.name}>: #{e.message}")
+  # if found a satellite host record then retire it
+  # else just ignore
+  if !satellite_host_record.blank?
+    satellite_host_id     = satellite_host_record['id']
+    $evm.log(:info, "satellite_host_id => '#{satellite_host_id}'") if @DEBUG
+  
+    begin
+      $evm.log(:info, "Unregister Satellite Host Record <#{satellite_host_id}> for Host <#{vm.name}>")
+      result = satellite_api.resource(:hosts).call(:destroy, { :id => satellite_host_id})
+      $evm.log(:info, "Unregistered Satellite Host Record <#{satellite_host_id}> for Host <#{vm.name}>")
+    rescue RestClient::NotFound
+      warn("No Satellite Host Record <#{satellite_host_id}> to unregister for Host <#{vm.name}>")
+    rescue => e
+      warn("Unexpected error when unregistering Satellite Host Record <#{satellite_host_id}> to unregister for Host <#{vm.name}>: #{e.message}")
+    end
+  else
+    $evm.log(:info, "No Satellite Host Record to unregister found for Host <#{vm.name}>. Skipping and ignoring.")
   end
 end
