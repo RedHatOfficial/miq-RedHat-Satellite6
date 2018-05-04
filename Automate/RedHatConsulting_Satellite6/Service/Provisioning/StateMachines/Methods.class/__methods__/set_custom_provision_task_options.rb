@@ -35,22 +35,6 @@ def get_custom_additional_values(dialog_options)
   dialog_satellite_domain_id = dialog_options[:satellite_domain_id]
   if !dialog_satellite_domain_id.blank?
     custom_additional_values[:satellite_domain_id] = dialog_satellite_domain_id
-  else
-    domain_name = dialog_options[:domain_name]
-    $evm.log(:info, "domain_name => '#{domain_name}'") if @DEBUG
-    if !domain_name.blank?
-      satellite_api ||= get_satellite_api()
-    
-      # query satellite for the domain id
-      satellite_domains = satellite_api.resource(:domains).call(:index)['results']
-      satellite_domain  = satellite_domains.find { |domain| domain['name'] == domain_name }
-      error("Could not find Satellite Domain with name: '#{domain_name}'") if satellite_domain.nil?
-    
-      # set the additional dialog option
-      custom_additional_values[:satellite_domain_id] = satellite_domain['id']
-    else
-      error("One of <satellite_domain_id, domain_name> must be supplied as dialog options.")
-    end
   end
   
   # ensure satellite_location_id is set
