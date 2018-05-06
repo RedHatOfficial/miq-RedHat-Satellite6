@@ -51,3 +51,9 @@ object:
       on_exit: update_provision_status(status => 'Added additional disks post kickstart')
       on_error: 'update_provision_status(status => ''Error adding additional disks
         post kickstart: ${/#ae_reason}'')'
+  - PostBuildCompleted_5:
+      value: "/AutomationManagement/AnsibleTower/Operations/OptionalJobTemplate/Default"
+      on_entry: update_provision_status(status => 'Running Ansible Tower Job')
+      on_exit: update_provision_status(status => 'Running Ansible Tower Job')
+      on_error: 'update_provision_status(status => ''Error running Ansible Tower Job:
+        ${/#ae_reason}'')'

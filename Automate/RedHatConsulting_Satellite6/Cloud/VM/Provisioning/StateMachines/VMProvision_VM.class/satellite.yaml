@@ -31,3 +31,9 @@ object:
         Complete')
       on_error: update_provision_status(status => 'Waiting for VM Satellite Build
         to Complete')
+  - PostBuildCompleted_5:
+      value: "/AutomationManagement/AnsibleTower/Operations/OptionalJobTemplate/Default"
+      on_entry: update_provision_status(status => 'Running Ansible Tower Job')
+      on_exit: update_provision_status(status => 'Running Ansible Tower Job')
+      on_error: 'update_provision_status(status => ''Error running Ansible Tower Job:
+        ${/#ae_reason}'')'
