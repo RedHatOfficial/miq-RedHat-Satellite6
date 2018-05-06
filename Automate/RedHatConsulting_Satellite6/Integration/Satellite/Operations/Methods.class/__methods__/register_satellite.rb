@@ -293,10 +293,20 @@ begin
     end
   end
   
+  # determine owner
+  satellite_config      = $evm.instantiate(SATELLITE_CONFIG_URI)
+  satellite_owner_group = satellite_config['satellite_owner_group']
+  if !satellite_owner_group.nil?
+    satellite_usergroups_result = satellite_api.resource(:usergroups).call(:index, {:search => "#{satellite_owner_group}"})
+    satellite_usergroup         = satellite_usergroups_result['results'].first
+  end
+  
   # create the new host request
   vm_mac = vm.nil? ? nil : vm.mac_addresses[0]
   new_host_request = {
     :name                  => vm_name,
+    :owner_type            => satellite_usergroup.blank? ? 'User' : 'Usergroup', # NOTE: docs say 'user' and 'usergroup' but Foreman requires 'User' or 'Usergroup'
+    :owner_id              => satellite_usergroup.blank? ? nil    : satellite_usergroup['id'],
     :organization_id       => satellite_organization_id,
     :location_id           => satellite_location_id,
     :hostgroup_id          => satellite_hostgroup_id,

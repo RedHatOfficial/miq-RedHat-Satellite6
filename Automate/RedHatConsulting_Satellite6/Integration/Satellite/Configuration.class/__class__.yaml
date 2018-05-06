@@ -72,11 +72,33 @@ object:
       max_retries: 
       max_time: 
   - field:
+      aetype: attribute
+      name: satellite_owner_group
+      display_name: 
+      datatype: string
+      priority: 4
+      owner: 
+      default_value: Automated Provisioning
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: Satellite user group to own provisioned VMs. Assuming Satellite
+        6.3 or above and create_users snippit enabled in provisioning tempaltes then
+        this will decide which SSH keys get deployed to newly provisioned hosts.
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: 
+  - field:
       aetype: method
       name: get_satellite_configuration
       display_name: 
       datatype: string
-      priority: 4
+      priority: 5
       owner: 
       default_value: get_satellite_configuration
       substitute: true
