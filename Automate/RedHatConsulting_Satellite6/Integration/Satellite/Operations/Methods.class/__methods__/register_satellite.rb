@@ -302,7 +302,7 @@ begin
   end
   
   # create the new host request
-  vm_mac = vm.nil? ? nil : vm.mac_addresses[0]
+  vm_mac = vm.nil? ? nil : vm.mac_addresses.first
   new_host_request = {
     :name                  => vm_name,
     :owner_type            => satellite_usergroup.blank? ? 'User' : 'Usergroup', # NOTE: docs say 'user' and 'usergroup' but Foreman requires 'User' or 'Usergroup'
