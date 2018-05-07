@@ -23,14 +23,20 @@ object:
       value: "/Cloud/VM/Provisioning/StateMachines/Methods/Provision"
   - CheckProvisioned:
       value: "/Cloud/VM/Provisioning/StateMachines/Methods/CheckProvisioned"
+  - PostVMClone_1:
+      value: "/Integration/Satellite/Operations/Methods/UpdateSatellite"
+      on_entry: update_provision_status(status => 'Update Satellite Host Record')
+      on_exit: update_provision_status(status => 'Updated Satellite Host Record')
+      on_error: 'update_provision_status(status => ''Failed to update Satellite Host
+        Record: ${/#ae_reason}'')'
   - CheckBuildCompleted:
       value: "/Integration/Satellite/Operations/Methods/CheckSatelliteBuildCompleted"
       on_entry: update_provision_status(status => 'Waiting for VM Satellite Build
         to Complete')
       on_exit: update_provision_status(status => 'Waiting for VM Satellite Build to
         Complete')
-      on_error: update_provision_status(status => 'Waiting for VM Satellite Build
-        to Complete')
+      on_error: 'update_provision_status(status => ''Failed waiting for VM Satellite
+        Build to Complete: ${/#ae_reason}'')'
   - PostBuildCompleted_5:
       value: "/AutomationManagement/AnsibleTower/Operations/OptionalJobTemplate/Default"
       on_entry: update_provision_status(status => 'Running Ansible Tower Job')

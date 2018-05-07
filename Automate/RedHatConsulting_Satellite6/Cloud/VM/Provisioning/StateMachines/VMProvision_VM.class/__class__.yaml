@@ -233,12 +233,12 @@ object:
       max_time: 
   - field:
       aetype: state
-      name: PostVMClone_1
+      name: WaitForVMMACAddresses
       display_name: 
       datatype: string
       priority: 12
       owner: 
-      default_value: 
+      default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/WaitForVMMACAddresses"
       substitute: true
       message: create
       visibility: 
@@ -246,19 +246,20 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
-      max_retries: 
-      max_time: '600'
+      on_entry: update_provision_status(status => 'Wait for VM MAC Addresses')
+      on_exit: update_provision_status(status => 'Wait for VM MAC Addresses')
+      on_error: 'update_provision_status(status => ''Error waiting for VM MAC Addresses:
+        ${/#ae_reason}'')'
+      max_retries: '20'
+      max_time: 
   - field:
       aetype: state
-      name: PostVMClone_2
+      name: WaitForVMIPAddresses
       display_name: 
       datatype: string
       priority: 13
       owner: 
-      default_value: 
+      default_value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/WaitForVMIPAddresses"
       substitute: true
       message: create
       visibility: 
@@ -266,14 +267,15 @@ object:
       scope: 
       description: 
       condition: 
-      on_entry: 
-      on_exit: 
-      on_error: 
-      max_retries: 
-      max_time: '600'
+      on_entry: update_provision_status(status => 'Wait for VM IP Addresses')
+      on_exit: update_provision_status(status => 'Wait for VM IP Addresses')
+      on_error: 'update_provision_status(status => ''Error waiting for VM IP Addresses:
+        ${/#ae_reason}'')'
+      max_retries: '20'
+      max_time: 
   - field:
       aetype: state
-      name: PostVMClone_3
+      name: PostVMClone_1
       display_name: 
       datatype: string
       priority: 14
@@ -293,7 +295,7 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: PostVMClone_4
+      name: PostVMClone_2
       display_name: 
       datatype: string
       priority: 15
@@ -313,7 +315,7 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: PostVMClone_5
+      name: PostVMClone_3
       display_name: 
       datatype: string
       priority: 16
@@ -333,10 +335,50 @@ object:
       max_time: '600'
   - field:
       aetype: state
-      name: CheckBuildCompleted
+      name: PostVMClone_4
       display_name: 
       datatype: string
       priority: 17
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: '600'
+  - field:
+      aetype: state
+      name: PostVMClone_5
+      display_name: 
+      datatype: string
+      priority: 18
+      owner: 
+      default_value: 
+      substitute: true
+      message: create
+      visibility: 
+      collect: 
+      scope: 
+      description: 
+      condition: 
+      on_entry: 
+      on_exit: 
+      on_error: 
+      max_retries: 
+      max_time: '600'
+  - field:
+      aetype: state
+      name: CheckBuildCompleted
+      display_name: 
+      datatype: string
+      priority: 19
       owner: 
       default_value: 
       substitute: true
@@ -356,7 +398,7 @@ object:
       name: PostBuildCompleted_1
       display_name: 
       datatype: string
-      priority: 18
+      priority: 20
       owner: 
       default_value: 
       substitute: true
@@ -376,7 +418,7 @@ object:
       name: PostBuildCompleted_2
       display_name: 
       datatype: string
-      priority: 19
+      priority: 21
       owner: 
       default_value: 
       substitute: true
@@ -396,7 +438,7 @@ object:
       name: PostBuildCompleted_3
       display_name: 
       datatype: string
-      priority: 20
+      priority: 22
       owner: 
       default_value: 
       substitute: true
@@ -416,7 +458,7 @@ object:
       name: PostBuildCompleted_4
       display_name: 
       datatype: string
-      priority: 21
+      priority: 23
       owner: 
       default_value: 
       substitute: true
@@ -436,7 +478,7 @@ object:
       name: PostBuildCompleted_5
       display_name: 
       datatype: string
-      priority: 22
+      priority: 24
       owner: 
       default_value: 
       substitute: true
@@ -456,7 +498,7 @@ object:
       name: EmailOwner
       display_name: 
       datatype: string
-      priority: 23
+      priority: 25
       owner: 
       default_value: "/Cloud/VM/Provisioning/Email/MiqProvision_Complete?event=vm_provisioned"
       substitute: true
@@ -476,7 +518,7 @@ object:
       name: Finished
       display_name: 
       datatype: string
-      priority: 24
+      priority: 26
       owner: 
       default_value: "/System/CommonMethods/StateMachineMethods/vm_provision_finished"
       substitute: true
