@@ -1,8 +1,4 @@
-# If the given VM has `satellite_host_id` custom attribute set then unregister that VM from satellite.
-#
-# EXPECTED
-#   EVM ROOT
-#     vm - VM to unregister from Satellite if it has the `satellite_host_id` custom attribute set
+# Removes the Satellite Host Requred associated with the given VMs FQDN.
 #
 @DEBUG = false
 
