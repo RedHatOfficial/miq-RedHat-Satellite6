@@ -84,13 +84,11 @@ If you follow the below steps on greed field, configured, Red Hat CloudForms app
 
 *   [Understanding the Automate Model - Creating a Domain](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/scripting_actions_in_cloudforms/understanding-the-automate-model#creating-a-domain) covers the steps required to create a domain within the Automate model.  The recommendation is to create a domain with a name of Configuration but the name of the domain is inconsequential.  The ordering of the domains is important and that will be covered later in this document.
 
-### 
-        Create Configuration Domain:
+### Create Configuration Domain:
 
 *   Create Configuration Domain and Enable
 
-### 
-    Network Configuration:
+### Network Configuration:
 
 *   Override RedHatConsulting_Utilities/Infrastructure/Network/Configuration by copying the instance into your new configuration domain.
     *   Add a new instance for each provisioning and destination VLAN
@@ -102,8 +100,7 @@ If you follow the below steps on greed field, configured, Red Hat CloudForms app
         *   (network_nameservers: [10.10.10.2,10.10.10.3]
         *   (network_ddi_provider): satellite
 
-### 
-    Email Configuration:
+### Email Configuration:
 
 *   In order to modify the from email address, override each of the following and change from_email_address value:
     *   Copy the following instances into your Configuration domain from RedHatConsulting_Utilities/Infrastructure/VM/Provisioning/Email
