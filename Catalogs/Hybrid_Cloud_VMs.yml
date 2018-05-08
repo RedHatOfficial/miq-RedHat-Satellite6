@@ -46,3 +46,46 @@
           :roles:
           - _ALL_
       custom_button_sets: []
+    - name: Apache HTTPD
+      description: Provision Apache HTTPD across the hybrid cloud
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      options: {}
+      service_template_catalog_name: Hybrid Cloud VMs
+      resource_actions:
+      - action: Retirement
+        ae_namespace: Service/Retirement/StateMachines
+        ae_class: ServiceRetirement
+        ae_instance: Default
+        ae_message: 
+        ae_attributes:
+          :service_action: Retirement
+        dialog_label: Satellite Provisioning (Apache HTTPD)
+      - action: Provision
+        ae_namespace: Service/Provisioning/StateMachines
+        ae_class: ServiceProvision_Template
+        ae_instance: Generic_CatalogItemInitialization
+        ae_message: 
+        ae_attributes:
+          :service_action: Provision
+        dialog_label: Satellite Provisioning (Apache HTTPD)
+      custom_buttons:
+      - description: Provision new VMs to Service
+        applies_to_exp: 
+        options:
+          :button_image: 10
+          :display: true
+          :open_url: false
+          :display_for: single
+          :submit_how: one
+        userid: admin
+        wait_for_complete: 
+        name: Add VMs
+        visibility:
+          :roles:
+          - _ALL_
+      custom_button_sets: []
