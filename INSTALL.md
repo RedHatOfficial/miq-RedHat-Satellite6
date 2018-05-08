@@ -124,32 +124,25 @@ If you follow the below steps on greed field, configured, Red Hat CloudForms app
 
 *   [Understanding the Automate Model - Importing a Domain](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/scripting_actions_in_cloudforms/understanding-the-automate-model#importing-a-domain) explains how to import the required Automate domains.  The relevant repositories with links are included below.  In order to control release, you may want to choose a specific branch or tag.
 
-### 
-    Import Automate Domains from RedHatOfficial Github:
+### Import Automate Domains from RedHatOfficial Github:
 
 *   Import miq-RedHat-Satellite6
-        *   [https://github.com/RedHatOfficial/miq-RedHat-Satellite6.git](https://github.com/RedHatOfficial/miq-RedHat-Satellite6.git)
+    *   [https://github.com/RedHatOfficial/miq-RedHat-Satellite6.git](https://github.com/RedHatOfficial/miq-RedHat-Satellite6.git)
 *   Import miq-Utilities
     *   [https://github.com/RedHatOfficial/miq-Utilities.git](https://github.com/RedHatOfficial/miq-Utilities.git)
 
 
 ## Automate Domain Priority:
 
-
-
 *   [Understanding the Automate Model - Changing Priority Order of Domains](https://access.redhat.com/documentation/en-us/red_hat_cloudforms/4.5/html/scripting_actions_in_cloudforms/understanding-the-automate-model#changing-priority-order-of-domains) explains the process required in order to properly configure the priority of Automate Domains.  The following is the necessary priority required for this configuration.
 
-### 
-    Configure Automate Domain Priority:
+### Configure Automate Domain Priority:
 
-        *   Configuration
-        *   RedHatConsulting_Satellite6
-        *   RedHatConsulting_Utilities
-
+*   Configuration
+*   RedHatConsulting_Satellite6
+*   RedHatConsulting_Utilities
 
 # Service Dialogs and Catalogs:
-
-
 
 *   A pre-configured catalog and associated service dialog are provided as part of the miq-RedHat-Satellite6 project on Github.  Complete the following steps to import these items.
 
@@ -179,29 +172,24 @@ If you follow the below steps on greed field, configured, Red Hat CloudForms app
 ## Tag Categories:
 
 
-### 
-    Environment Tag Category
+### Environment Tag Category
 
+*   Delete environment Tag Category
+*   Recreate environment Tag Category
+    *   Name: environment
+    *   Description: Environment
+    *   Long Description: Environment
+    *   Show in Console: Yes
+    *   Single Value: No
 
+### Operating System Tag Category
 
-        *   Delete environment Tag Category
-        *   Recreate environment Tag Category
-            *   Name: environment
-            *   Description: Environment
-            *   Long Description: Environment
-            *   Show in Console: Yes
-            *   Single Value: No
-
-### 
-    Operating System Tag Category
-
-        *   Create os Tag Category
-            *   Name: os
-            *   Description: Operating System
-            *   Long Description: Operating System
-            *   Show in Console: Yes
-            *   Single Value: Yes
-
+*   Create os Tag Category
+    *   Name: os
+    *   Description: Operating System
+    *   Long Description: Operating System
+    *   Show in Console: Yes
+    *   Single Value: Yes
 
 ## Tags:
 
@@ -209,15 +197,13 @@ If you follow the below steps on greed field, configured, Red Hat CloudForms app
 
 *   In order to auto-populate some of the tags, you can simply open the service dialog at this point.  Once the dialog has opened, simply close the dialog and continue with tagging.  This will create the appropriate environment and location tags based on your Satellite configuration.
 
-### 
-    Operating System Tags:
+### Operating System Tags:
 
 *   Create Tag for each Operating System Supported
-*   i.e. name: rhel6, description: RHEL 6
-*   i.e. name: rhel7, description: RHEL 7
+    *   i.e. name: rhel6, description: RHEL 6
+    *   i.e. name: rhel7, description: RHEL 7
 
-### 
-    Infrastructure Provider Tags:
+### Infrastructure Provider Tags:
 
 *   Infrastructure Providers require a multitude of tags based on your organization's configuration and design.  The providers being used for automated provisioning need the following tags applied appropriate to your organization's goals.
 *   Location Tags
@@ -243,76 +229,25 @@ If you follow the below steps on greed field, configured, Red Hat CloudForms app
 *   The following example lists the steps necessary to tag and utilize a public image.
 *   Tagging of AWS Images
     *   Public_images_filters (Advanced Settings)
-                *   If you wanted to download public images and filter the images downloaded, you could make the following modifications to your Advanced Settings of your appliance(s).  This example limits public images to the current RHEL 7 image.
-                    *   Change
-
-<p id="gdcalert1" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: Definition &darr;&darr; outside of definition list. Missing preceding term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert2">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
+        *   If you wanted to download public images and filter the images downloaded, you could make the following modifications to your Advanced Settings of your appliance(s).  This example limits public images to the current RHEL 7 image.
+            *   Change
 
                         :ec2:
-
-
-<p id="gdcalert2" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: Definition &darr;&darr; outside of definition list. Missing preceding term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert3">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-
                           :get_public_images: false
-
-
-<p id="gdcalert3" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: Definition &darr;&darr; outside of definition list. Missing preceding term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert4">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-
                           :public_images_filters:
-
-
                           - :name: image-type
-
-
-<p id="gdcalert4" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: Definition &darr;&darr; outside of definition list. Missing preceding term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert5">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-
                             :values:
-
-
                             - machine
 
-                    *   To
-
-<p id="gdcalert5" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: Definition &darr;&darr; outside of definition list. Missing preceding term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert6">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
+            *   To
 
                         :ec2:
-
-
-<p id="gdcalert6" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: Definition &darr;&darr; outside of definition list. Missing preceding term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert7">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-
                           :get_public_images: true
-
-
-<p id="gdcalert7" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: Definition &darr;&darr; outside of definition list. Missing preceding term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert8">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-
                           :public_images_filters:
-
-
                           - :name: image-id
-
-
-<p id="gdcalert8" ><span style="color: red; font-weight: bold">>>>>>  gd2md-html alert: Definition &darr;&darr; outside of definition list. Missing preceding term(s)? </span><br>(<a href="#">Back to top</a>)(<a href="#gdcalert9">Next alert</a>)<br><span style="color: red; font-weight: bold">>>>>> </span></p>
-
-
-
                             :values:
-
-
                             - ami-6871a115
+
 
 *   Tag the Image
     *   Navigate to Compute / Clouds / Instances / Images by Provider
