@@ -70,12 +70,9 @@ If you follow the below steps on greed field, configured, Red Hat CloudForms app
 
 
 ## Enable and configure Git Repositories Owner Server Role:
-
-
-
-    *   Enable 'Git Repositories Owner' Server Role
-    *   Promote 'Git Repositories Owner' Role to Primary if necessary
-    *   Start the 'Git Repositories Role' if necessary
+  *   Enable 'Git Repositories Owner' Server Role
+  *   Promote 'Git Repositories Owner' Role to Primary if necessary
+  *   Start the 'Git Repositories Role' if necessary
 
 
 # Automate Domains:
