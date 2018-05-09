@@ -261,7 +261,8 @@ begin
   $evm.log(:info, "satellite_location_id     => #{satellite_location_id}")     if @DEBUG
   
   # determine satellite subnet
-  network_name                  = miq_provision.get_option(:vlan) || $evm.vmdb(:cloud_subnet).find_by_id(miq_provision.get_option(:cloud_subnet)).name
+  network_name                  = options[:network_name] || miq_provision.get_option(:network_name) ||
+                                  miq_provision.get_option(:vlan) || $evm.vmdb(:cloud_subnet).find_by_id(miq_provision.get_option(:cloud_subnet)).name
   $evm.log(:info, "network_name => #{network_name}") if @DEBUG
   network_configuration         = get_network_configuration(network_name)
   network_address_space         = network_configuration['network_address_space']

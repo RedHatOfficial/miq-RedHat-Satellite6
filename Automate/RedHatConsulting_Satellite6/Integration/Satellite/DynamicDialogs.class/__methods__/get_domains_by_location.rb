@@ -4,6 +4,24 @@
 
 require 'apipie-bindings'
 
+def dump_object(object_string, object)
+  $evm.log("info", "Listing #{object_string} Attributes:") 
+  object.attributes.sort.each { |k, v| $evm.log("info", "\t#{k}: #{v}") }
+  $evm.log("info", "===========================================") 
+end
+
+def dump_current
+  $evm.log("info", "Listing Current Object Attributes:") 
+  $evm.current.attributes.sort.each { |k, v| $evm.log("info", "\t#{k}: #{v}") }
+  $evm.log("info", "===========================================") 
+end
+
+def dump_root
+  $evm.log("info", "Listing Root Object Attributes:") 
+  $evm.root.attributes.sort.each { |k, v| $evm.log("info", "\t#{k}: #{v}") }
+  $evm.log("info", "===========================================") 
+end
+
 # Log an error and exit.
 #
 # @param msg Message to error with
@@ -100,15 +118,15 @@ def return_dialog_element(visible_and_required, values, default_value = nil)
 end
 
 begin
+  dump_root()    if @DEBUG
+  dump_current() if @DEBUG
+  
   # If there isn't a vmdb_object_type yet just exit. The method will be recalled with an vmdb_object_type
   exit MIQ_OK unless $evm.root['vmdb_object_type']
   
-  # get satellite API
-  satellite_api = get_satellite_api()
-  error('Could not get Satellite API') if satellite_api.nil?
-  
   # get the location tags
   location_tags = get_param(:dialog_location_tags)
+  location_tags = location_tags.delete_if { |location_tag| location_tag.nil? || location_tag == "NaN" } if !location_tags.blank?
   $evm.log(:info, "location_tags => #{location_tags}") if @DEBUG
   
   # if no location tags selected then hide dialog element
@@ -123,6 +141,10 @@ begin
   location_tag_name = location_tags[location_index]
   $evm.log(:info, "location_tag_name => #{location_tag_name}") if @DEBUG
   location_tag  = $evm.vmdb(:classification).find_by_name(location_tag_name)
+  
+  # get satellite API
+  satellite_api = get_satellite_api()
+  error('Could not get Satellite API') if satellite_api.nil?
   
   # get the satellite location
   location_index = satellite_api.resource(:locations).call(:index)
