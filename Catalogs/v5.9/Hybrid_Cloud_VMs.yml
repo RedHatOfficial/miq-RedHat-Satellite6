@@ -1,0 +1,66 @@
+---
+- Hybrid Cloud VMs:
+    name: Hybrid Cloud VMs
+    description: Service catalogs to deploy VMs across a hybrid cloud.
+    tenant_name: My Company
+    template:
+    - name: Hybrid Cloud | RHEL
+      description: Provision RHEL across the hybrid cloud
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      tenant_name: My Company
+      options: {}
+      service_template_catalog_name: Hybrid Cloud VMs
+      resource_actions:
+      - action: Provision
+        ae_namespace: RedHatConsulting_Utilities/Service/Provisioning/StateMachines
+        ae_class: ServiceProvision_Template
+        ae_instance: Generic_CatalogItemInitialization
+        ae_message: 
+        ae_attributes:
+          :service_action: Provision
+        dialog_label: Satellite Provisioning
+      - action: Retirement
+        ae_namespace: Service/Retirement/StateMachines
+        ae_class: ServiceRetirement
+        ae_instance: Default
+        ae_message: 
+        ae_attributes:
+          :service_action: Retirement
+        dialog_label: Satellite Provisioning
+      custom_buttons: []
+      custom_button_sets: []
+    - name: Hybrid Cloud | Apache HTTPD
+      description: Provision Apache HTTPD across the hybrid cloud
+      type: 
+      display: true
+      service_type: atomic
+      prov_type: generic
+      provision_cost: 
+      long_description: ''
+      tenant_name: My Company
+      options: {}
+      service_template_catalog_name: Hybrid Cloud VMs
+      resource_actions:
+      - action: Provision
+        ae_namespace: RedHatConsulting_Utilities/Service/Provisioning/StateMachines
+        ae_class: ServiceProvision_Template
+        ae_instance: Generic_CatalogItemInitialization
+        ae_message: 
+        ae_attributes:
+          :service_action: Provision
+        dialog_label: Satellite Provisioning (Apache HTTPD)
+      - action: Retirement
+        ae_namespace: Service/Retirement/StateMachines
+        ae_class: ServiceRetirement
+        ae_instance: Default
+        ae_message: 
+        ae_attributes:
+          :service_action: Retirement
+        dialog_label: Satellite Provisioning (Apache HTTPD)
+      custom_buttons: []
+      custom_button_sets: []
