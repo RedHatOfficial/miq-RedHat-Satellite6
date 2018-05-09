@@ -85,6 +85,23 @@ def get_satellite_api()
   return satellite_api
 end
 
+# @param visible_and_required Boolean true if the dialog element is visible and required, false if hidden
+# @param values               Hash    Values for the dialog element
+# @param default_value        String  
+def return_dialog_element(visible_and_required, values, default_value = nil)
+  # create dialog element
+  dialog_field = $evm.object
+  dialog_field['data_type']     = "String"
+  dialog_field['visible']       = visible_and_required
+  dialog_field['required']      = visible_and_required
+  dialog_field['values']        = values
+  dialog_field['default_value'] = default_value
+  dialog_field['required']      = true
+  $evm.log(:info, "dialog_field['values'] => #{dialog_field['values']}") if @DEBUG
+  
+  exit MIQ_OK
+end
+
 begin
   # If there isn't a vmdb_object_type yet just exit. The method will be recalled with an vmdb_object_type
   exit MIQ_OK unless $evm.root['vmdb_object_type']
@@ -102,6 +119,7 @@ begin
     dialog_field_values[tag_path] = location_name
   end
   
+  # remove location tags that are not tagged on a provider
   providers = $evm.vmdb(:ems).all
   dialog_field_values.delete_if do |id, name|
     provider_tagged      = false
@@ -116,13 +134,7 @@ begin
     
     !provider_tagged
   end
+  dialog_field_values[nil] = '<Choose>'
   
-  $evm.log(:info, "dialog_field_values post filtering: #{dialog_field_values}") if @DEBUG
-  
-  dialog_field               = $evm.object
-  dialog_field["sort_by"]    = "value"
-  dialog_field["sort_order"] = "ascending"
-  dialog_field["data_type"]  = "integer"
-  dialog_field["required"]   = true
-  dialog_field["values"]     = dialog_field_values
+  return_dialog_element(true, dialog_field_values)
 end
