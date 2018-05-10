@@ -442,44 +442,6 @@
       display_method_options: 
       position: 0
       dialog_fields:
-      - name: job_template_name
-        description: Ansible Tower Job Template to Run.
-        type: DialogFieldTextBox
-        data_type: string
-        notes: 
-        notes_display: 
-        display: edit
-        display_method: 
-        display_method_options: {}
-        required: true
-        required_method: 
-        required_method_options: {}
-        default_value: Deploy Apache HTTPD
-        values: 
-        values_method: 
-        values_method_options: {}
-        options:
-          :protected: false
-        label: Job Template Name
-        position: 0
-        validator_type: 
-        validator_rule: 
-        reconfigurable: false
-        dynamic: false
-        show_refresh_button: false
-        load_values_on_init: false
-        read_only: true
-        auto_refresh: false
-        trigger_auto_refresh: false
-        visible: true
-        resource_action:
-          action: 
-          resource_type: DialogField
-          ae_namespace: 
-          ae_class: 
-          ae_instance: 
-          ae_message: 
-          ae_attributes: {}
       - name: param_apache_httpd_website_repo
         description: Git repository to deploy as the website content.
         type: DialogFieldTextAreaBox
@@ -499,7 +461,7 @@
         options:
           :protected: false
         label: Website Repository
-        position: 1
+        position: 0
         validator_type: 
         validator_rule: 
         reconfigurable: false
@@ -537,7 +499,7 @@
         options:
           :protected: false
         label: Website Repository Version
-        position: 2
+        position: 1
         validator_type: 
         validator_rule: 
         reconfigurable: false
