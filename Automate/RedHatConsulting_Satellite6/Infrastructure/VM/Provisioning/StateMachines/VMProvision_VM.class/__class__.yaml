@@ -412,7 +412,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: '600'
+      max_time: ''
   - field:
       aetype: state
       name: PostBuildCompleted_2
@@ -432,7 +432,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: '600'
+      max_time: ''
   - field:
       aetype: state
       name: PostBuildCompleted_3
@@ -452,7 +452,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: '600'
+      max_time: ''
   - field:
       aetype: state
       name: PostBuildCompleted_4
@@ -472,7 +472,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: '600'
+      max_time: ''
   - field:
       aetype: state
       name: PostBuildCompleted_5
@@ -492,7 +492,7 @@ object:
       on_exit: 
       on_error: 
       max_retries: ''
-      max_time: '600'
+      max_time: ''
   - field:
       aetype: state
       name: PostProvision

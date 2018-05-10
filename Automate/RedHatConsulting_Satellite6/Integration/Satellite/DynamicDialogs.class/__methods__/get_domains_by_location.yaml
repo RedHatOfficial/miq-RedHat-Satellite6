@@ -9,6 +9,7 @@ object:
     scope: instance
     language: ruby
     location: inline
+    options: {}
   inputs:
   - field:
       aetype: 
