@@ -50,6 +50,8 @@ def create_tag(category, tag)
                  :name => tag_name,
                  :description => tag)
   end
+  
+  return "#{category}/#{tag_name}"
 end
 
 # Create a Tag  Category if it does not already exist
