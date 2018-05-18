@@ -427,6 +427,430 @@
           ae_instance: get_hostgroups
           ae_message: 
           ae_attributes: {}
+  - description: 
+    display: 
+    label: Basic
+    display_method: 
+    display_method_options: 
+    position: 0
+    dialog_groups:
+    - description: Details about the new Service.
+      display: 
+      label: Service
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: service_name
+        description: Name of the new Service.
+        type: DialogFieldTextBox
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Service Name
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: false
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: Details about the Virtual Machine(s).
+      display: edit
+      label: VM(s)
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: vm_prefix
+        description: ''
+        type: DialogFieldTextBox
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: VM Name Prefix
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: false
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: number_of_vms
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Number of VMs
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_vm_counts
+          ae_message: 
+          ae_attributes: {}
+      - name: option_0_number_of_sockets
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: VM CPUs
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_cpu_sizes
+          ae_message: 
+          ae_attributes: {}
+      - name: option_0_vm_memory
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: VM Memory (GB)
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_memory_sizes
+          ae_message: 
+          ae_attributes: {}
+      - name: os_tag
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Operating System
+        position: 4
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: System
+          ae_class: DynamicDialogs
+          ae_instance: get_os_tags
+          ae_message: 
+          ae_attributes: {}
+    - description: Details about the VM's environment.
+      display: edit
+      label: Environment
+      display_method: 
+      display_method_options: 
+      position: 2
+      dialog_fields:
+      - name: satellite_organization_id
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Organization
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Satellite
+          ae_class: DynamicDialogs
+          ae_instance: get_organizations
+          ae_message: 
+          ae_attributes: {}
+      - name: location_tags
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: true
+        label: Locations
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Satellite
+          ae_class: DynamicDialogs
+          ae_instance: get_locations_by_tag_path
+          ae_message: 
+          ae_attributes: {}
+      - name: satellite_environment_id
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Environment
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Satellite
+          ae_class: DynamicDialogs
+          ae_instance: get_lifecycle_environments_filtered_by_tags
+          ae_message: 
+          ae_attributes: {}
+      - name: satellite_hostgroup_id
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Hostgroup
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Satellite
+          ae_class: DynamicDialogs
+          ae_instance: get_hostgroups
+          ae_message: 
+          ae_attributes: {}
   - description: Infrastructure specific configuration.
     display: edit
     label: Infrastructure
@@ -1305,6 +1729,904 @@
           ae_namespace: Service/Provisioning
           ae_class: DynamicDialogs
           ae_instance: get_provider_3_cloud_ssh_keys
+          ae_message: 
+          ae_attributes: {}
+  - description: Infrastructure specific configuration.
+    display: edit
+    label: Infrastructure
+    display_method: 
+    display_method_options: 
+    position: 1
+    dialog_groups:
+    - description: ''
+      display: edit
+      label: Providers & Templates
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: templates
+        description: ''
+        type: DialogFieldTextAreaBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Providers & Templates
+        position: 0
+        validator_type: 
+        validator_rule: "^---"
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: true
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_templates_based_on_selected_os_and_location
+          ae_message: 
+          ae_attributes: {}
+    - description: Selected Location 1 configuration.
+      display: edit
+      label: Location 1
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: location_0_domain_name
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Domain 1
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Satellite
+          ae_class: DynamicDialogs
+          ae_instance: get_location_0_domains
+          ae_message: 
+          ae_attributes: {}
+      - name: location_0_provisioning_network
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Provisioning Network
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_0_provisioning_networks
+          ae_message: 
+          ae_attributes: {}
+      - name: location_0_destination_network
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Destination Network
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_0_destination_networks
+          ae_message: 
+          ae_attributes: {}
+      - name: location_0_cloud_flavor
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Cloud Flavor
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_0_cloud_flavors
+          ae_message: 
+          ae_attributes: {}
+      - name: location_0_cloud_ssh_key
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Cloud SSH Key
+        position: 4
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_0_cloud_ssh_keys
+          ae_message: 
+          ae_attributes: {}
+    - description: Selected Location 2 configuration.
+      display: edit
+      label: Location 2
+      display_method: 
+      display_method_options: 
+      position: 2
+      dialog_fields:
+      - name: location_1_domain_name
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Domain 2
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Satellite
+          ae_class: DynamicDialogs
+          ae_instance: get_location_1_domains
+          ae_message: 
+          ae_attributes: {}
+      - name: location_1_provisioning_network
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Provisioning Network
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_1_provisioning_networks
+          ae_message: 
+          ae_attributes: {}
+      - name: location_1_destination_network
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Destination Network
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_1_destination_networks
+          ae_message: 
+          ae_attributes: {}
+      - name: location_1_cloud_flavor
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Cloud Flavor
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_1_cloud_flavors
+          ae_message: 
+          ae_attributes: {}
+      - name: location_1_cloud_ssh_key
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Cloud SSH Key
+        position: 4
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_1_cloud_ssh_keys
+          ae_message: 
+          ae_attributes: {}
+    - description: Selected Location 3 configuration.
+      display: edit
+      label: Location 3
+      display_method: 
+      display_method_options: 
+      position: 3
+      dialog_fields:
+      - name: location_2_domain_name
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Domain 3
+        position: 0
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Integration/Satellite
+          ae_class: DynamicDialogs
+          ae_instance: get_location_2_domains
+          ae_message: 
+          ae_attributes: {}
+      - name: location_2_provisioning_network
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Provisioning Network
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_2_provisioning_networks
+          ae_message: 
+          ae_attributes: {}
+      - name: location_2_destination_network
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Destination Network
+        position: 2
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_2_destination_networks
+          ae_message: 
+          ae_attributes: {}
+      - name: location_2_cloud_flavor
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Cloud Flavor
+        position: 3
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_2_cloud_flavors
+          ae_message: 
+          ae_attributes: {}
+      - name: location_2_cloud_ssh_key
+        description: ''
+        type: DialogFieldDropDownList
+        data_type: string
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :sort_by: description
+          :sort_order: ascending
+          :force_multi_value: false
+        label: Cloud SSH Key
+        position: 4
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: true
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: false
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: Service/Provisioning
+          ae_class: DynamicDialogs
+          ae_instance: get_provider_2_cloud_ssh_keys
+          ae_message: 
+          ae_attributes: {}
+  - description: ''
+    display: edit
+    label: Disks
+    display_method: 
+    display_method_options: 
+    position: 2
+    dialog_groups:
+    - description: Primary disk options. Attached pre-kickstart.
+      display: edit
+      label: Primary Disk (Pre-Kickstart)
+      display_method: 
+      display_method_options: 
+      position: 0
+      dialog_fields:
+      - name: disk_pre_kickstart_1_size
+        description: Size of additional disk in gigabytes.
+        type: DialogFieldTextBox
+        data_type: integer
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: true
+        required_method: 
+        required_method_options: {}
+        default_value: '10'
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Size (GB)
+        position: 0
+        validator_type: 
+        validator_rule: "[0-9]+"
+        reconfigurable: false
+        dynamic: false
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+      - name: disk_pre_kickstart_1_bootable
+        description: If checked then disk is bootable, else not.
+        type: DialogFieldCheckBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: t
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Bootable?
+        position: 1
+        validator_type: 
+        validator_rule: 
+        reconfigurable: false
+        dynamic: false
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: true
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: Additional disk 1 options. Attached post-kickstart.
+      display: edit
+      label: Additional Disk 1
+      display_method: 
+      display_method_options: 
+      position: 1
+      dialog_fields:
+      - name: disk_post_kickstart_1_size
+        description: Size of additional disk in gigabytes.
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Size (GB)
+        position: 0
+        validator_type: 
+        validator_rule: "[0-9]*"
+        reconfigurable: false
+        dynamic: false
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: Additional disk 2 options. Attached post-kickstart.
+      display: edit
+      label: Additional Disk 2
+      display_method: 
+      display_method_options: 
+      position: 2
+      dialog_fields:
+      - name: disk_post_kickstart_2_size
+        description: Size of additional disk in gigabytes.
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Size (GB)
+        position: 0
+        validator_type: 
+        validator_rule: "[0-9]*"
+        reconfigurable: false
+        dynamic: false
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
+          ae_message: 
+          ae_attributes: {}
+    - description: Additional disk 3 options. Attached post-kickstart.
+      display: edit
+      label: Additional Disk 3
+      display_method: 
+      display_method_options: 
+      position: 3
+      dialog_fields:
+      - name: disk_post_kickstart_3_size
+        description: Size of additional disk in gigabytes.
+        type: DialogFieldTextBox
+        data_type: 
+        notes: 
+        notes_display: 
+        display: edit
+        display_method: 
+        display_method_options: {}
+        required: false
+        required_method: 
+        required_method_options: {}
+        default_value: ''
+        values: 
+        values_method: 
+        values_method_options: {}
+        options:
+          :protected: false
+        label: Size (GB)
+        position: 0
+        validator_type: 
+        validator_rule: "[0-9]*"
+        reconfigurable: false
+        dynamic: false
+        show_refresh_button: false
+        load_values_on_init: false
+        read_only: false
+        auto_refresh: false
+        trigger_auto_refresh: false
+        visible: true
+        resource_action:
+          action: 
+          resource_type: DialogField
+          ae_namespace: 
+          ae_class: 
+          ae_instance: 
           ae_message: 
           ae_attributes: {}
   - description: ''
