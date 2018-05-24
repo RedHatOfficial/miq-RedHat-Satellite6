@@ -157,6 +157,11 @@ def get_network_configuration(network_name)
     begin
       escaped_network_name                  = network_name.gsub(/[^a-zA-Z0-9_\.\-]/, '_')
       @network_configurations[network_name] = $evm.instantiate("#{NETWORK_CONFIGURATION_URI}/#{escaped_network_name}")
+      
+      if escaped_network_name =~ /^dvs_/ && @network_configurations[network_name]['network_address_space'].blank?
+        escaped_network_name                  = escaped_network_name[/^dvs_(.*)/, 1]
+        @network_configurations[network_name] = $evm.instantiate("#{NETWORK_CONFIGURATION_URI}/#{escaped_network_name}")
+      end
     rescue
       @missing_network_configurations[network_name] = "WARN: No network configuration exists"
       $evm.log(:warn, "No network configuration for Network <#{network_name}> (escaped <#{escaped_network_name}>) exists")
@@ -265,6 +270,7 @@ begin
                                   miq_provision.get_option(:vlan) || $evm.vmdb(:cloud_subnet).find_by_id(miq_provision.get_option(:cloud_subnet)).name
   $evm.log(:info, "network_name => #{network_name}") if @DEBUG
   network_configuration         = get_network_configuration(network_name)
+  error("Could not find required network configuration for Network <#{network_name}>") if network_configuration.blank?
   network_address_space         = network_configuration['network_address_space']
   network_address, network_cidr = network_address_space.split('/')
   network_netmask               = IPAddr.new('255.255.255.255').mask(network_cidr).to_s
