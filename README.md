@@ -31,10 +31,4 @@ These ManageIQ atuomate domains must also be installed for this datastore to fun
 * [RedHatConsulting_Utilities](https://github.com/rhtconsulting/miq-Utilities)
 
 # Install
-0. Install dependencies
-1. Automate -> Import/Export
-2. Import Datastore via git
-3. Git URL: `https://github.com/rhtconsulting/miq-RedHat-Satellite6.git`
-4. Submit
-5. Select Branc/Tag to syncronize with
-6. Submit
+Please see the [INSTALL.md](https://github.com/RedHatOfficial/miq-RedHat-Satellite6/blob/master/INSTALL.md) file for install instructions
