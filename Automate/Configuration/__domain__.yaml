@@ -1,0 +1,13 @@
+---
+object_type: domain
+version: 1.0
+object:
+  attributes:
+    name: Configuration
+    description: Configuration
+    display_name: 
+    priority: 4
+    enabled: true
+    tenant_id: 2000000000001
+    source: user
+    top_level_namespace: 
