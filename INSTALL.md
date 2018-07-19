@@ -161,9 +161,9 @@ If you follow the below steps on greed field, configured, Red Hat CloudForms app
 *   Clone miq-RedHat-Satellite6 repository
     *   git clone https://github.com/RedHatOfficial/miq-RedHat-Satellite6.git
 *   Import Service Dialog
-    *   miqimport service_dialogs miq-RedHat-Satellite6/Dialogs/
+    *   miqimport service_dialogs miq-RedHat-Satellite6/Dialogs/<version>
 *   Import Catalog
-    *   miqimport service_catalogs miq-RedHat-Satellite6/Catalogs/
+    *   miqimport service_catalogs miq-RedHat-Satellite6/Catalogs/<version>
 
 
 # Tagging:
@@ -207,7 +207,7 @@ If you follow the below steps on greed field, configured, Red Hat CloudForms app
 
 *   Infrastructure Providers require a multitude of tags based on your organization's configuration and design.  The providers being used for automated provisioning need the following tags applied appropriate to your organization's goals.
 *   Location Tags
-    *   Tag each Provider with appropriate environment tag
+    *   Tag each Provider with appropriate location tag
 *   Environment Tags
     *   Tag each Provider with appropriate environment tag(s)
 *   Provisioning Scope: All
