@@ -10,6 +10,7 @@ object:
   fields:
   - ReleaseIPAddress:
       value: "/Infrastructure/Network/Operations/Methods/ReleaseIPAddress"
+      collect: "/released_ip_address = released_ip_address"
   - RemoveFromProvider:
       value: "/Infrastructure/VM/Retirement/StateMachines/Methods/RemoveFromProvider"
   - CheckRemovedFromProvider:
