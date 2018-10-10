@@ -113,7 +113,7 @@ end
 # @param visible_and_required Boolean true if the dialog element is visible and required, false if hidden
 # @param values               Hash    Values for the dialog element
 # @param default_value        String  
-def return_dialog_element(visible_and_required, values, default_value = nil)
+def return_dialog_element(visible_and_required, values, default_value = "")
   # create dialog element
   dialog_field = $evm.object
   dialog_field['data_type']     = "String"
@@ -159,7 +159,6 @@ begin
     
     !provider_tagged
   end
-  dialog_field_values[nil] = '<Choose>'
   
   return_dialog_element(true, dialog_field_values)
 end
