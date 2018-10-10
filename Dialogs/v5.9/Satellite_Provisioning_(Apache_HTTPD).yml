@@ -20,7 +20,6 @@
       dialog_fields:
       - name: service_name
         description: Name of the new Service.
-        type: DialogFieldTextBox
         data_type: string
         notes: 
         notes_display: 
@@ -48,6 +47,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldTextBox
         resource_action:
           action: 
           resource_type: DialogField
@@ -66,7 +66,6 @@
       dialog_fields:
       - name: vm_prefix
         description: ''
-        type: DialogFieldTextBox
         data_type: string
         notes: 
         notes_display: 
@@ -94,6 +93,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldTextBox
         resource_action:
           action: 
           resource_type: DialogField
@@ -105,7 +105,6 @@
         dialog_field_responders: []
       - name: number_of_vms
         description: ''
-        type: DialogFieldDropDownList
         data_type: integer
         notes: 
         notes_display: 
@@ -116,7 +115,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -135,6 +133,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -144,9 +143,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: option_0_number_of_sockets
         description: ''
-        type: DialogFieldDropDownList
         data_type: integer
         notes: 
         notes_display: 
@@ -157,7 +156,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -176,6 +174,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -185,9 +184,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: option_0_vm_memory
         description: ''
-        type: DialogFieldDropDownList
         data_type: integer
         notes: 
         notes_display: 
@@ -198,7 +197,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -217,6 +215,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -226,9 +225,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: os_tag
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -239,7 +238,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -258,6 +256,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -267,6 +266,7 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
     - description: Details about the VM's environment.
       display: edit
       label: Environment
@@ -276,7 +276,6 @@
       dialog_fields:
       - name: satellite_organization_id
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -287,7 +286,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -306,6 +304,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -314,10 +313,13 @@
           ae_instance: get_organizations
           ae_message: 
           ae_attributes: {}
-        dialog_field_responders: []
+        dialog_field_responders:
+        - location_tags
+        - satellite_environment_id
+        - satellite_hostgroup_id
+        values: 
       - name: location_tags
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -328,7 +330,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -347,6 +348,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -355,10 +357,11 @@
           ae_instance: get_locations_filtered_by_tags
           ae_message: 
           ae_attributes: {}
-        dialog_field_responders: []
+        dialog_field_responders:
+        - templates
+        values: 
       - name: satellite_environment_id
         description: ''
-        type: DialogFieldDropDownList
         data_type: integer
         notes: 
         notes_display: 
@@ -369,7 +372,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -388,6 +390,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -396,10 +399,11 @@
           ae_instance: get_lifecycle_environments_filtered_by_tags
           ae_message: 
           ae_attributes: {}
-        dialog_field_responders: []
+        dialog_field_responders:
+        - templates
+        values: 
       - name: satellite_hostgroup_id
         description: ''
-        type: DialogFieldDropDownList
         data_type: integer
         notes: 
         notes_display: 
@@ -410,7 +414,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -429,6 +432,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -438,6 +442,7 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
   - description: Apache HTTPD specific configuration
     display: edit
     label: Apache HTTPD
@@ -454,7 +459,6 @@
       dialog_fields:
       - name: param_apache_httpd_website_repo
         description: Git repository to deploy as the website content.
-        type: DialogFieldTextAreaBox
         data_type: 
         notes: 
         notes_display: 
@@ -482,6 +486,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldTextAreaBox
         resource_action:
           action: 
           resource_type: DialogField
@@ -493,7 +498,6 @@
         dialog_field_responders: []
       - name: param_apache_httpd_website_repo_version
         description: Git branch/tag to deploy
-        type: DialogFieldTextBox
         data_type: 
         notes: 
         notes_display: 
@@ -521,6 +525,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldTextBox
         resource_action:
           action: 
           resource_type: DialogField
@@ -546,7 +551,6 @@
       dialog_fields:
       - name: templates
         description: ''
-        type: DialogFieldTextAreaBox
         data_type: 
         notes: 
         notes_display: 
@@ -557,7 +561,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -574,6 +577,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldTextAreaBox
         resource_action:
           action: 
           resource_type: DialogField
@@ -582,7 +586,28 @@
           ae_instance: get_templates_based_on_selected_os_and_location
           ae_message: 
           ae_attributes: {}
-        dialog_field_responders: []
+        dialog_field_responders:
+        - location_0_domain_name
+        - location_0_provisioning_network
+        - location_0_destination_network
+        - location_0_cloud_flavor
+        - location_0_cloud_ssh_key
+        - location_1_domain_name
+        - location_1_provisioning_network
+        - location_1_destination_network
+        - location_1_cloud_flavor
+        - location_1_cloud_ssh_key
+        - location_2_domain_name
+        - location_2_provisioning_network
+        - location_2_destination_network
+        - location_2_cloud_flavor
+        - location_2_cloud_ssh_key
+        - location_3_domain_name
+        - location_3_provisioning_network
+        - location_3_destination_network
+        - location_3_cloud_flavor
+        - location_3_cloud_ssh_key
+        values: 
     - description: Selected Location 1 configuration.
       display: edit
       label: Location 1
@@ -592,7 +617,6 @@
       dialog_fields:
       - name: location_0_domain_name
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -603,14 +627,13 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
           :sort_by: description
           :sort_order: ascending
           :force_multi_value: false
-        label: Domain 1
+        label: Domain
         position: 0
         validator_type: 
         validator_rule: 
@@ -622,6 +645,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -631,9 +655,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_0_provisioning_network
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -644,7 +668,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -663,6 +686,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -672,9 +696,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_0_destination_network
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -685,7 +709,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -704,6 +727,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -713,9 +737,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_0_cloud_flavor
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -726,7 +750,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -745,6 +768,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -754,9 +778,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_0_cloud_ssh_key
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -767,7 +791,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -786,6 +809,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -795,6 +819,7 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
     - description: Selected Location 2 configuration.
       display: edit
       label: Location 2
@@ -804,7 +829,6 @@
       dialog_fields:
       - name: location_1_domain_name
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -815,14 +839,13 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
           :sort_by: description
           :sort_order: ascending
           :force_multi_value: false
-        label: Domain 2
+        label: Domain
         position: 0
         validator_type: 
         validator_rule: 
@@ -834,6 +857,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -843,9 +867,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_1_provisioning_network
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -856,7 +880,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -875,6 +898,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -884,9 +908,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_1_destination_network
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -897,7 +921,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -916,6 +939,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -925,9 +949,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_1_cloud_flavor
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -938,7 +962,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -957,6 +980,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -966,9 +990,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_1_cloud_ssh_key
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -979,7 +1003,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -998,6 +1021,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -1007,6 +1031,7 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
     - description: Selected Location 3 configuration.
       display: edit
       label: Location 3
@@ -1016,7 +1041,6 @@
       dialog_fields:
       - name: location_2_domain_name
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -1027,14 +1051,13 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
           :sort_by: description
           :sort_order: ascending
           :force_multi_value: false
-        label: Domain 3
+        label: Domain
         position: 0
         validator_type: 
         validator_rule: 
@@ -1046,6 +1069,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -1055,9 +1079,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_2_provisioning_network
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -1068,7 +1092,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -1087,6 +1110,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -1096,9 +1120,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_2_destination_network
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -1109,7 +1133,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -1128,6 +1151,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -1137,9 +1161,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_2_cloud_flavor
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -1150,7 +1174,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -1169,6 +1192,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -1178,9 +1202,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_2_cloud_ssh_key
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -1191,7 +1215,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -1210,6 +1233,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -1219,6 +1243,7 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
     - description: Selected Location 4 configuration.
       display: edit
       label: Location 4
@@ -1228,7 +1253,6 @@
       dialog_fields:
       - name: location_3_domain_name
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -1239,14 +1263,13 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
           :sort_by: description
           :sort_order: ascending
           :force_multi_value: false
-        label: Domain 4
+        label: Domain
         position: 0
         validator_type: 
         validator_rule: 
@@ -1258,6 +1281,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -1267,9 +1291,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_3_provisioning_network
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -1280,7 +1304,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -1299,6 +1322,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -1308,9 +1332,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_3_destination_network
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -1321,7 +1345,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -1340,6 +1363,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -1349,9 +1373,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_3_cloud_flavor
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -1362,7 +1386,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -1381,6 +1404,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -1390,9 +1414,9 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
       - name: location_3_cloud_ssh_key
         description: ''
-        type: DialogFieldDropDownList
         data_type: string
         notes: 
         notes_display: 
@@ -1403,7 +1427,6 @@
         required_method: 
         required_method_options: {}
         default_value: ''
-        values: 
         values_method: 
         values_method_options: {}
         options:
@@ -1422,6 +1445,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: false
+        type: DialogFieldDropDownList
         resource_action:
           action: 
           resource_type: DialogField
@@ -1431,6 +1455,7 @@
           ae_message: 
           ae_attributes: {}
         dialog_field_responders: []
+        values: 
   - description: ''
     display: edit
     label: Disks
@@ -1447,7 +1472,6 @@
       dialog_fields:
       - name: disk_pre_kickstart_1_size
         description: Size of additional disk in gigabytes.
-        type: DialogFieldTextBox
         data_type: integer
         notes: 
         notes_display: 
@@ -1475,6 +1499,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldTextBox
         resource_action:
           action: 
           resource_type: DialogField
@@ -1486,7 +1511,6 @@
         dialog_field_responders: []
       - name: disk_pre_kickstart_1_bootable
         description: If checked then disk is bootable, else not.
-        type: DialogFieldCheckBox
         data_type: 
         notes: 
         notes_display: 
@@ -1514,6 +1538,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldCheckBox
         resource_action:
           action: 
           resource_type: DialogField
@@ -1532,7 +1557,6 @@
       dialog_fields:
       - name: disk_post_kickstart_1_size
         description: Size of additional disk in gigabytes.
-        type: DialogFieldTextBox
         data_type: 
         notes: 
         notes_display: 
@@ -1560,6 +1584,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldTextBox
         resource_action:
           action: 
           resource_type: DialogField
@@ -1578,7 +1603,6 @@
       dialog_fields:
       - name: disk_post_kickstart_2_size
         description: Size of additional disk in gigabytes.
-        type: DialogFieldTextBox
         data_type: 
         notes: 
         notes_display: 
@@ -1606,6 +1630,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldTextBox
         resource_action:
           action: 
           resource_type: DialogField
@@ -1624,7 +1649,6 @@
       dialog_fields:
       - name: disk_post_kickstart_3_size
         description: Size of additional disk in gigabytes.
-        type: DialogFieldTextBox
         data_type: 
         notes: 
         notes_display: 
@@ -1652,6 +1676,7 @@
         auto_refresh: false
         trigger_auto_refresh: false
         visible: true
+        type: DialogFieldTextBox
         resource_action:
           action: 
           resource_type: DialogField
