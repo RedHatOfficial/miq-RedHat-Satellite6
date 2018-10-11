@@ -354,7 +354,7 @@
           resource_type: DialogField
           ae_namespace: Integration/Satellite
           ae_class: DynamicDialogs
-          ae_instance: get_locations_filtered_by_tags
+          ae_instance: get_locations_by_tag_path
           ae_message: 
           ae_attributes: {}
         dialog_field_responders:
