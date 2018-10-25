@@ -266,37 +266,40 @@ begin
   $evm.log(:info, "satellite_location_id     => #{satellite_location_id}")     if @DEBUG
   
   # determine satellite subnet
-  network_name                  = options[:network_name] || miq_provision.get_option(:network_name) ||
-                                  miq_provision.get_option(:vlan) || $evm.vmdb(:cloud_subnet).find_by_id(miq_provision.get_option(:cloud_subnet)).name
+  network_name = options[:network_name] || miq_provision.get_option(:network_name) ||
+                 miq_provision.get_option(:vlan) || $evm.vmdb(:cloud_subnet).find_by_id(miq_provision.get_option(:cloud_subnet)).name
   $evm.log(:info, "network_name => #{network_name}") if @DEBUG
-  network_configuration         = get_network_configuration(network_name)
-  error("Could not find required network configuration for Network <#{network_name}>") if network_configuration.blank?
-  network_address_space         = network_configuration['network_address_space']
-  network_address, network_cidr = network_address_space.split('/')
-  network_netmask               = IPAddr.new('255.255.255.255').mask(network_cidr).to_s
-  satelltie_subnet_results      = satellite_api.resource(:subnets).call(
-    :index,
-    {
-      :organization_id => satellite_organization_id,
-      :location_id     => satellite_location_id,
-      :domain_id       => satellite_domain_id,
-      :search          => "network = #{network_address} and mask = #{network_netmask}"
-    }
-  )
-  if satelltie_subnet_results['results'].empty?
-    $evm.log(:warn, "Did not find Satellite Subnet for network address <#{network_address}> with network netmask <#{network_netmask}> " +
-                    "in Satelllite Organization <#{satellite_organization_id}>, in Satellite Location <#{satellite_location_id}>, " +
-                    "in Satellite Domain <#{satellite_domain_id}>. " +
-                    "Ignore, will not specify Satellite subnet ID in new host record creation.")
+  network_configuration = get_network_configuration(network_name)
+  if network_configuration.blank?
+    $evm.log(:warn, "Could not find network configuration information for <#{network_name}>. Ignore, will not specify Satellite subnet ID in new host record creation.")
   else
-    satellite_subnet = satelltie_subnet_results['results'][0]
+    network_address_space         = network_configuration['network_address_space']
+    network_address, network_cidr = network_address_space.split('/')
+    network_netmask               = IPAddr.new('255.255.255.255').mask(network_cidr).to_s
+    satelltie_subnet_results      = satellite_api.resource(:subnets).call(
+      :index,
+      {
+        :organization_id => satellite_organization_id,
+        :location_id     => satellite_location_id,
+        :domain_id       => satellite_domain_id,
+        :search          => "network = #{network_address} and mask = #{network_netmask}"
+      }
+    )
+    if satelltie_subnet_results['results'].empty?
+      $evm.log(:warn, "Did not find Satellite Subnet for network address <#{network_address}> with network netmask <#{network_netmask}> " +
+                      "in Satelllite Organization <#{satellite_organization_id}>, in Satellite Location <#{satellite_location_id}>, " +
+                      "in Satellite Domain <#{satellite_domain_id}>. " +
+                      "Ignore, will not specify Satellite subnet ID in new host record creation.")
+    else
+      satellite_subnet = satelltie_subnet_results['results'][0]
     
-    # NOTE: this should never happen, but warn in case it does
-    if satelltie_subnet_results['results'].length > 1
-       $evm.log(:warn, "Found more then one Satellite Subnet for network address <#{network_address}> with network netmask <#{network_netmask}> " +
-                       "in Satelllite Organization <#{satellite_organization_id}>, in Satellite Location <#{satellite_location_id}>, " +
-                       "in Satellite Domain <#{satellite_domain_id}>. " +
-                       "Ignore, will use first resultin new host record creation.")
+      # NOTE: this should never happen, but warn in case it does
+      if satelltie_subnet_results['results'].length > 1
+         $evm.log(:warn, "Found more then one Satellite Subnet for network address <#{network_address}> with network netmask <#{network_netmask}> " +
+                         "in Satelllite Organization <#{satellite_organization_id}>, in Satellite Location <#{satellite_location_id}>, " +
+                         "in Satellite Domain <#{satellite_domain_id}>. " +
+                         "Ignore, will use first resultin new host record creation.")
+      end
     end
   end
   
