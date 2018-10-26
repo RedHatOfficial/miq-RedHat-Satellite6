@@ -28,7 +28,7 @@ end
 def get_custom_additional_values(dialog_options)
   # set base custom additional values
   custom_additional_values = {
-    :custom_provision_type => 'satellite'
+    :custom_request_type => 'satellite'
   }
   
   # ensure satellite_domain_id is set
