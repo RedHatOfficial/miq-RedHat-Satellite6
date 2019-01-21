@@ -7,7 +7,7 @@
 #
 @DEBUG = false
 
-PROVISIONING_TELEMETRY_PREFIX = "Provisioning: Telemetry:"
+PROVISIONING_TELEMETRY_PREFIX = "Provisioning_Telemetry"
 
 # Converts duration of seconds to HH:MM:SS
 #
@@ -42,7 +42,7 @@ end
 
 # Set VM custom attribute with provisioning telemetry data
 def set_provisioning_telemetry_custom_attribute(vm, description, value)
-  vm.custom_set("#{PROVISIONING_TELEMETRY_PREFIX} #{description}", value)
+  vm.custom_set("#{PROVISIONING_TELEMETRY_PREFIX}_#{description}".gsub('[ :].*', '_'), value)
 end
 
 begin
@@ -63,16 +63,16 @@ begin
   # NOTE: Satellite 6 specific
   duration_wait_for_satellite_build_completed = get_duration(:vm_provisioning_telemetry_on_exit_StartVM, :vm_provisioning_telemetry_on_exit_CheckSatelliteBuildCompleted)
   
-  set_provisioning_telemetry_custom_attribute(vm, 'Time: Request Created',               prov.created_on.localtime)
-  set_provisioning_telemetry_custom_attribute(vm, 'Time: Request Completed',             now)
-  set_provisioning_telemetry_custom_attribute(vm, 'Hour: Request Created',               prov.created_on.localtime.hour)
-  set_provisioning_telemetry_custom_attribute(vm, 'Duration: Task Queue',                duration_task_queue)
-  set_provisioning_telemetry_custom_attribute(vm, 'Duration: Total VM Provisioning',     duration_vm_provisioning)
-  set_provisioning_telemetry_custom_attribute(vm, 'Duration: VM Clone',                  duration_vm_clone)
-  set_provisioning_telemetry_custom_attribute(vm, 'Duration: Wait for VM MAC Addresses', duration_wait_for_vm_mac_addresses)
-  set_provisioning_telemetry_custom_attribute(vm, 'Duration: Start VM',                  duration_start_vm)
-  set_provisioning_telemetry_custom_attribute(vm, 'Duration: Wait for VM IP Addresses',  duration_wait_for_vm_ip_addresses)
+  set_provisioning_telemetry_custom_attribute(vm, 'Time_Request_Created',               prov.created_on.localtime)
+  set_provisioning_telemetry_custom_attribute(vm, 'Time_Request_Completed',             now)
+  set_provisioning_telemetry_custom_attribute(vm, 'Hour_Request_Created',               prov.created_on.localtime.hour)
+  set_provisioning_telemetry_custom_attribute(vm, 'Duration_Task_Queue',                duration_task_queue)
+  set_provisioning_telemetry_custom_attribute(vm, 'Duration_Total_VM_Provisioning',     duration_vm_provisioning)
+  set_provisioning_telemetry_custom_attribute(vm, 'Duration_VM_Clone',                  duration_vm_clone)
+  set_provisioning_telemetry_custom_attribute(vm, 'Duration_Wait_for_VM_MAC_Addresses', duration_wait_for_vm_mac_addresses)
+  set_provisioning_telemetry_custom_attribute(vm, 'Duration_Start_VM',                  duration_start_vm)
+  set_provisioning_telemetry_custom_attribute(vm, 'Duration_Wait_for_VM_IP_Addresses',  duration_wait_for_vm_ip_addresses)
   
   # NOTE: Satellite 6 specific
-  set_provisioning_telemetry_custom_attribute(vm, 'Duration: Wait for Satellite Build To Complete',  duration_wait_for_satellite_build_completed)
+  set_provisioning_telemetry_custom_attribute(vm, 'Duration_Wait_for_Satellite_Build_To_Complete',  duration_wait_for_satellite_build_completed)
 end
