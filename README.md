@@ -1,38 +1,40 @@
-Role Name
-=========
+# miq-RedHat-Satellite6
+ManageIQ Automate Domain for integrating with Red Hat Satellite 6 developed by Red Hat Consulting.
 
-A brief description of the role goes here.
+# Table of Contents
+* [miq-RedHat-Satellite6](#miq-redhat-satellite6)
+* [Table of Contents](#table-of-contents)
+* [Features](#features)
+* [Dependencies](#dependencies)
+  * [Other Datastores](#other-datastores)
+* [Install](#install)
+* [Contributors](#contributors)
 
-Requirements
-------------
+# Features
+The high level features of this ManageIQ extension.
 
-Any pre-requisites that may not be covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+* Satellite 6 PXE & Kickstart based provisioning Service and VM state machines
+* Register VM to Satellite 6
+* VM retirment including unregister VM from Satellite 6
+* Satellite 6 dynamic dialogs
+  * hostgroups
+  * lifecycle environments
+  * locations
+  * organizaitons
 
-Role Variables
---------------
+# Dependencies
+Dependencies of this ManageIQ extensions.
 
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
+## Other Datastores
+These ManageIQ atuomate domains must also be installed for this datastore to function.
 
-Dependencies
-------------
+* [RedHatConsulting_Utilities](https://github.com/rhtconsulting/miq-Utilities)
 
-A list of other roles hosted on Galaxy should go here, plus any details in regards to parameters that may need to be set for other roles, or variables that are used from other roles.
-
-Example Playbook
-----------------
-
-Including an example of how to use your role (for instance, with variables passed in as parameters) is always nice for users too:
-
-    - hosts: servers
-      roles:
-         - { role: username.rolename, x: 42 }
-
-License
--------
-
-BSD
-
-Author Information
-------------------
-
-An optional section for the role authors to include contact information, or a website (HTML is not allowed).
+# Install
+0. Install dependencies
+1. Automate -> Import/Export
+2. Import Datastore via git
+3. Git URL: `https://github.com/rhtconsulting/miq-RedHat-Satellite6.git`
+4. Submit
+5. Select Branc/Tag to syncronize with
+6. Submit
