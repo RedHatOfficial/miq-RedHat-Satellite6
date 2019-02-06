@@ -1,0 +1,15 @@
+---
+object_type: method
+version: 1.0
+object:
+  attributes:
+    name: get_templates_based_on_selected_os_and_location_and_environment
+    display_name: 
+    description: 
+    scope: instance
+    language: ruby
+    location: inline
+    embedded_methods:
+    - "/StdLib/Core/Core"
+    options: {}
+  inputs: []
