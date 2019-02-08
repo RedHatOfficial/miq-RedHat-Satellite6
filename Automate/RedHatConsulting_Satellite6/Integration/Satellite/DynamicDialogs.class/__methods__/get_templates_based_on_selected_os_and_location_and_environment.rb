@@ -39,7 +39,6 @@ module RedHatConsulting_Satellite6
               os_tag                = @handle.root[OS_TAG_DIALOG_OPTION]
               location_tags         = @handle.root[LOCATION_TAGS_DIALOG_OPTION] || []
               environment_name      = get_environment_name()
-              environment_tag_name  = "#{ENVIRONMENT_TAG_CATEGORY}/#{to_tag_name(environment_name)}"
               log(:info, "os_tag               => #{os_tag}")               if @DEBUG
               log(:info, "location_tags        => #{location_tags}")        if @DEBUG
               log(:info, "environment_tag_name => #{environment_tag_name}") if @DEBUG
@@ -57,6 +56,9 @@ module RedHatConsulting_Satellite6
               if environment_name.blank?
                 invalid_selection = true
                 value << "Environment must be selected to determine valid destination providers."
+              else
+                environment_tag_name  = "#{ENVIRONMENT_TAG_CATEGORY}/#{to_tag_name(environment_name)}"
+                log(:info, "environment_tag_name => #{environment_tag_name}") if @DEBUG
               end
 
               # invalid if no location tags selected
@@ -209,21 +211,26 @@ module RedHatConsulting_Satellite6
             def get_environment_name()
               # determine environment
               satellite_environment_name = @handle.root[ENVIRONMENT_NAME_DIALOG_OPTION]
+              satellite_environment_id   = @handle.root[ENVIRONMENT_ID_DIALOG_OPTION]
+              # return nil if the dialog elements have not been selected yet
+              return nil if satellite_environment_name.blank? and satellite_environment_id.blank?
+              return nil if satellite_environment_name == '!' or satellite_environment_id == '!'
                   
               # if the satellite enviornment name is actually an ID
               # else if satellite envirnonment name not given check for satellite environment id
-              satellite_environment_id = nil
               if satellite_environment_name =~ /^[0-9]+$/
                 satellite_environment_id = satellite_environment_name.to_i
-              elsif satellite_environment_name.blank?
-                satellite_environment_id   = $evm.root[ENVIRONMENT_ID_DIALOG_OPTION]
               end
              
               if !satellite_environment_id.blank?
                 log(:info, "satellite_environment_id => #{satellite_environment_id}") if @DEBUG
                 satellite_api              = get_satellite_api()
-                satellite_environment      = satellite_api.resource(:lifecycle_environments).call(:show, {:id => satellite_environment_id})
-                satellite_environment_name = satellite_environment['name']
+                begin
+                  satellite_environment      = satellite_api.resource(:lifecycle_environments).call(:show, {:id => satellite_environment_id})
+                  satellite_environment_name = satellite_environment['name']
+                rescue => e
+                  error("Error invoking Satellite API: #{e.to_s}")
+                end
               end
               log(:error, "One of <satellite_environment_name, satellite_environment_id> must be specified.") if satellite_environment_name.blank?
               return satellite_environment_name
