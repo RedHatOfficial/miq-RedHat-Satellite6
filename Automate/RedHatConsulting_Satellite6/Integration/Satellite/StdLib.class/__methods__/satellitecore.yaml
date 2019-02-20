@@ -1,0 +1,15 @@
+---
+object_type: method
+version: 1.0
+object:
+  attributes:
+    name: SatelliteCore
+    display_name: Satellite Core Methods
+    description: 
+    scope: instance
+    language: ruby
+    location: inline
+    embedded_methods:
+    - "/StdLib/Core/Core"
+    options: {}
+  inputs: []
