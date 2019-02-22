@@ -38,18 +38,49 @@ def get_satellite_api()
   return satellite_api
 end
 
+ENVIRONMENT_NAME_DIALOG_OPTION = 'dialog_satellite_environment_name'
+ENVIRONMENT_ID_DIALOG_OPTION   = 'dialog_satellite_environment_id'
+def get_environment_name()
+  # determine environment
+  satellite_environment_name = $evm.root[ENVIRONMENT_NAME_DIALOG_OPTION]
+  satellite_environment_id   = $evm.root[ENVIRONMENT_ID_DIALOG_OPTION]
+  # return nil if the dialog elements have not been selected yet
+  return nil if satellite_environment_name.blank? and satellite_environment_id.blank?
+  return nil if satellite_environment_name == '!' or satellite_environment_id == '!'
+
+  # if the satellite enviornment name is actually an ID
+  # else if satellite envirnonment name not given check for satellite environment id
+  if satellite_environment_name =~ /^[0-9]+$/
+    satellite_environment_id = satellite_environment_name.to_i
+  end
+
+  if !satellite_environment_id.blank?
+    $evm.log(:info, "satellite_environment_id => #{satellite_environment_id}") if @DEBUG
+    satellite_api              = get_satellite_api()
+    begin
+      satellite_environment      = satellite_api.resource(:lifecycle_environments).call(:show, {:id => satellite_environment_id})
+      satellite_environment_name = satellite_environment['name']
+    rescue => e
+      error("Error invoking Satellite API: #{e.to_s}")
+    end
+  end
+  $evm.log(:error, "One of <satellite_environment_name, satellite_environment_id> must be specified.") if satellite_environment_name.blank?
+  return satellite_environment_name
+end
+
 begin
   # If there isn't a vmdb_object_type yet just exit. The method will be recalled with an vmdb_object_type
   exit MIQ_OK unless $evm.root['vmdb_object_type']
   
   satellite_api = get_satellite_api()
   
-  satellite_environment_id = $evm.root['dialog_satellite_environment_id']
+  satellite_environment_name = get_environment_name()
+  $evm.log(:info, "satellite_environment_name => #{satellite_environment_name}") if @DEBUG
+  
   
   hostgroups_search_string = ""
-  if satellite_environment_id
-    satellite_environment    = satellite_api.resource(:lifecycle_environments).call(:show, {:id => satellite_environment_id})
-    hostgroups_search_string = "lifecycle_environment = #{satellite_environment['name']}"
+  if !satellite_environment_name.blank?
+    hostgroups_search_string = "lifecycle_environment = #{satellite_environment_name}"
   end
   $evm.log(:info, "hostgroups_search_string => #{hostgroups_search_string}") if @DEBUG
   
