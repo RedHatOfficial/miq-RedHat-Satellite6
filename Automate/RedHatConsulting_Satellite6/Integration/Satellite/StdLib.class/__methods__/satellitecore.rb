@@ -12,8 +12,8 @@ module RedHatConsulting_Satellite6
       SATELLITE_CONFIG_URI           = 'Integration/Satellite/Configuration/default'
 
       def initialize( handle = $evm)
-        @handle                  = handle
-        @DEBUG                   = false
+        @handle = handle
+        @DEBUG  = false
       end
 
       # Gets an ApiPie binding to the Satellite API.
