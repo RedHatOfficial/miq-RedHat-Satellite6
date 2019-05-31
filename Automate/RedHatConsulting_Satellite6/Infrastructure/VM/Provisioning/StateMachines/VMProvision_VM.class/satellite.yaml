@@ -9,6 +9,11 @@ object:
     description: Provisions a new VM using Satellite PXE with the ability to add disks
       pre-kickstart and post-kickstart
   fields:
+  - PreProvision_2:
+      value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/set_network"
+      on_entry: update_provision_status(status => 'Setting Network')
+      on_exit: update_provision_status(status => 'Setting Network')
+      on_error: 'update_provision_status(status => ''Error setting network: ${/#ae_reason}'')'
   - Provision:
       value: "/Infrastructure/VM/Provisioning/StateMachines/Methods/Provision"
   - CheckProvisioned:
