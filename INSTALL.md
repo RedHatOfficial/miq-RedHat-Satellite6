@@ -159,11 +159,11 @@ If you follow the below steps on greed field, configured, Red Hat CloudForms app
 
 
 *   Clone miq-RedHat-Satellite6 repository
-    *   git clone https://github.com/RedHatOfficial/miq-RedHat-Satellite6.git
+    *   `git clone https://github.com/RedHatOfficial/miq-RedHat-Satellite6.git`
 *   Import Service Dialog
-    *   miqimport service_dialogs miq-RedHat-Satellite6/Dialogs/<version>
+    *   `miqimport service_dialogs miq-RedHat-Satellite6/Dialogs/<version>`
 *   Import Catalog
-    *   miqimport service_catalogs miq-RedHat-Satellite6/Catalogs/<version>
+    *   `miqimport service_catalogs miq-RedHat-Satellite6/Catalogs/<version>`
 
 
 # Tagging:
