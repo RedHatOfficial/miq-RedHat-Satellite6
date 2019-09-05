@@ -116,7 +116,7 @@ end
 def return_dialog_element(visible_and_required, values, default_value = "")
   # create dialog element
   dialog_field = $evm.object
-  dialog_field['data_type']     = "String"
+  dialog_field['data_type']     = "string"
   dialog_field['visible']       = visible_and_required
   dialog_field['required']      = visible_and_required
   dialog_field['values']        = values
