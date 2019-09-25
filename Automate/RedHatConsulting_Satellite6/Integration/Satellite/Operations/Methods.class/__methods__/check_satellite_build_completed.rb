@@ -72,5 +72,7 @@ begin
     $evm.root['ae_result'] = 'ok'
   end
 rescue => err
-  error("[#{err}]\n#{err.backtrace.join("\n")}")
+    $evm.log(:error, "Error checking build status: #{err.message}")
+    $evm.root['ae_result']         = 'retry'
+    $evm.root['ae_retry_interval'] = '30.seconds'
 end
