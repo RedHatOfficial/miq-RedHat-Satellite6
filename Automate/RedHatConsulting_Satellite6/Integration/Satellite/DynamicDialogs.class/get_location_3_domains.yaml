@@ -9,4 +9,4 @@ object:
     description: 
   fields:
   - execute:
-      value: get_domains_by_location(location_index => 3)
+      value: get_domains_by_hostgroup(location_index => 0)
