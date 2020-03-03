@@ -351,6 +351,8 @@ begin
   # store the satellite host record id for future use
   miq_provision = $evm.root['miq_provision']
   miq_provision.set_option(:satellite_host_id, satellite_host_record['id']) if miq_provision
+  # store the destination_ip_address for the WaitForVMIPAddresses method to validate the IP address reported for the VM
+  miq_provision.set_option(:destination_ip_address, satellite_host_record['ip']) if miq_provision and !(IPAddr.new(satellite_host_record['ip']) rescue nil).nil?  
   
   # set custom attribute on VM if the VM exists
   vm.custom_set('satellite_host_id', satellite_host_record['id']) if vm
