@@ -307,7 +307,7 @@ begin
   satellite_config      = $evm.instantiate(SATELLITE_CONFIG_URI)
   satellite_owner_group = satellite_config['satellite_owner_group']
   if !satellite_owner_group.nil?
-    satellite_usergroups_result = satellite_api.resource(:usergroups).call(:index, {:search => "#{satellite_owner_group}"})
+    satellite_usergroups_result = satellite_api.resource(:usergroups).call(:index, {:search => "name=#{satellite_owner_group}"})
     satellite_usergroup         = satellite_usergroups_result['results'].first
   end
   
