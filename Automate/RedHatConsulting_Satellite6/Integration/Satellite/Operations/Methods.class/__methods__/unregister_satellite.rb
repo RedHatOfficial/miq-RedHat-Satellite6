@@ -55,7 +55,7 @@ end
 def get_satellite_host_record(satellite_api, name)
   satellite_host_record = nil
   begin
-    satellite_index_result = satellite_api.resource(:hosts).call(:index, {:search => "#{name}"})
+    satellite_index_result = satellite_api.resource(:hosts).call(:index, {:search => "name=#{name}"})
     if !satellite_index_result['results'].empty?
       satellite_host_record  = satellite_index_result['results'][0]
       
