@@ -87,7 +87,7 @@ def get_satellite_api()
   error("Satellite User configuration not found")     if satellite_username.nil?
   error("Satellite Password configuration not found") if satellite_password.nil?
   
-  satellite_api = ApipieBindings::API.new({:uri => satellite_server, :username => satellite_username, :password => satellite_password, :api_version => 2})
+  satellite_api = ApipieBindings::API.new({:uri => satellite_server, :username => satellite_username, :password => satellite_password, :api_version => 2, :apidoc_cache_dir => "/tmp/foreman" }, {:verify_ssl => false})
   $evm.log(:info, "satellite_api = #{satellite_api}") if @DEBUG
   return satellite_api
 end
